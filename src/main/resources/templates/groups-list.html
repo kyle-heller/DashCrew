@@ -1,4 +1,4 @@
-
+ <html xmlns:th="http://thymeleaf.org">
 <body class="d-flex flex-column h-100">
 <main class="flex-shrink-0">
     <!-- Navigation-->
@@ -39,28 +39,10 @@
                 <p class="lead fw-normal text-muted mb-0">Company portfolio</p>
             </div>
             <div class="row gx-5">
-                <div class="col-lg-6">
+                <div th:each="group :${groups}" class="col-lg-6">
                     <div class="position-relative mb-5">
-                        <img class="img-fluid rounded-3 mb-3" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." />
-                        <a class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="position-relative mb-5">
-                        <img class="img-fluid rounded-3 mb-3" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." />
-                        <a class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="position-relative mb-5 mb-lg-0">
-                        <img class="img-fluid rounded-3 mb-3" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." />
-                        <a class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="position-relative">
-                        <img class="img-fluid rounded-3 mb-3" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." />
-                        <a class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
+                        <img class="img-fluid rounded-3 mb-3" th:src="${group.photoURL}" alt="..." />
+                        <a th:text="${group.title}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
                     </div>
                 </div>
             </div>
@@ -93,3 +75,4 @@
 <!-- Core theme JS-->
 <script src="js/scripts.js"></script>
 </body>
+ </html>
