@@ -1,4 +1,4 @@
-package com.dashcrew.web.models;
+package com.rollcall.web.dto;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,22 +11,14 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
+public class GroupDto {
 
-@Entity
-@Table(name = "groups")
-public class Group {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String photoURL;
     private String content;
-    @CreationTimestamp
     private LocalDateTime createdOn;
-    @UpdateTimestamp
     private LocalDateTime updatedOn;
 
 }
