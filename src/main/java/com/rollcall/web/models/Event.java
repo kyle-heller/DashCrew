@@ -1,7 +1,6 @@
 package com.rollcall.web.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,25 +13,34 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-
 @Entity
-@Table(name = "groups")
-public class Group {
+
+public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String title;
+    private String name;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+    private String type;
     private String photoURL;
-    private String content;
     @CreationTimestamp
     private LocalDateTime createdOn;
     @UpdateTimestamp
     private LocalDateTime updatedOn;
 
-    @OneToMany(mappedBy = "group", cascade = CascadeType.REMOVE)
-    private Set<Event> events = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name="group_id", nullable = false)
+    private Group group;
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }
