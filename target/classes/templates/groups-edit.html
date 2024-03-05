@@ -3,7 +3,7 @@
       layout:decorate="~{layout}">
 <head>
   <title>
-    Group Edit
+    Group Update
   </title>
 </head>
 <body class="d-flex flex-column h-100">
@@ -46,7 +46,7 @@
           <p th:if="${#fields.hasErrors('content')}" class="text-danger" th:errors="*{content}"></p>
 
         </div>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">Update</button>
       </form>
   </section>
 </main>

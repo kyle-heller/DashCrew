@@ -45,6 +45,12 @@ public class GroupServiceImpl implements GroupService {
         groupRepository.save(group);
     }
 
+    @Override
+    public void deleteGroup(Long groupId) {
+        groupRepository.deleteById(groupId);
+    }
+
+
     private Group mapToGroup(GroupDto group) {
         Group groupDto = Group.builder()
                 .id(group.getId())

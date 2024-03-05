@@ -30,7 +30,7 @@
                             <h2 class="card-title">About this game</h2>
                             <p class="card-text" th:text="${group.content}"></p>
                             <a class="btn btn-primary" href="#!">Read more →</a>
-                            <a class="btn btn-primary">Delete</a>
+                            <a class="btn btn-primary" th:href="@{/groups/{groupId}/delete(groupId=${group.id})}">Delete</a>
                         </div>
                     </div>
                     <!-- Nested row for non-featured blog posts-->

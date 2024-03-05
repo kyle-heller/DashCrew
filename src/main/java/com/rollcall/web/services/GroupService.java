@@ -10,7 +10,11 @@ public interface GroupService {
 
     Group saveGroup(GroupDto groupDto);
 
+    
+
     GroupDto findClubById(long groupId);
 
     void updateGroup(GroupDto group);
+
+    void deleteGroup(Long groupId);
 }
