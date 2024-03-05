@@ -21,6 +21,7 @@
                         <img class="img-fluid rounded-3 mb-3" th:src="${group.photoURL}" alt="..." />
                         <a th:text="${group.title}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
                     </div>
+                    <a class="btn btn-primary" th:href="@{/groups/{groupId}(groupId=${group.id})}">View</a>
                     <a class="btn btn-primary" th:href="@{/groups/{groupId}/edit(groupId=${group.id})}">Edit</a>
 
                 </div>
