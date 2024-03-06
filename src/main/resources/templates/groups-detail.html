@@ -30,8 +30,10 @@
                             <h2 class="card-title">About this game</h2>
                             <p class="card-text" th:text="${group.content}"></p>
                             <a class="btn btn-primary" href="#!">Read more →</a>
-                            <a class="btn btn-primary" th:href="@{/groups/{groupId}/delete(groupId=${group.id})}">Delete</a>
-                            <a class="btn btn-primary" th:href="@{/events/{groupId}/new(groupId=${group.id})}">Create Event</a>
+                            <div th:if="${user.id} == ${group.createdBy.id}">
+                                <a class="btn btn-primary" th:href="@{/groups/{groupId}/delete(groupId=${group.id})}">Delete</a>
+                                <a class="btn btn-primary" th:href="@{/events/{groupId}/new(groupId=${group.id})}">Create Event</a>
+                            </div>
                         </div>
                     </div>
                     <!-- Nested row for non-featured blog posts-->
