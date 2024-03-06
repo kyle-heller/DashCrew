@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.rollcall.web.mapper.GroupMapper.mapToGroup;
+import static com.rollcall.web.mapper.GroupMapper.mapToGroupDto;
+
 @Service
 public class GroupServiceImpl implements GroupService {
     private GroupRepository groupRepository;
@@ -23,7 +26,7 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public List<GroupDto> findAllGroups() {
         List<Group> groups = groupRepository.findAll();
-        return groups.stream().map(this::mapToGroupDto).collect(Collectors.toList());
+        return groups.stream().map(group -> mapToGroupDto(group) ).collect(Collectors.toList());
     }
 
     @Override
@@ -53,32 +56,7 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public List<GroupDto> searchGroups(String query) {
         List<Group> groups = groupRepository.searchGroups( query);
-        return groups.stream().map(this::mapToGroupDto).collect(Collectors.toList());
+        return groups.stream().map(group -> mapToGroupDto(group)).collect(Collectors.toList());
     }
 
-
-
-    private Group mapToGroup(GroupDto group) {
-        Group groupDto = Group.builder()
-                .id(group.getId())
-                .title(group.getTitle())
-                .content(group.getContent())
-                .photoURL(group.getPhotoURL())
-                .createdOn(group.getCreatedOn())
-                .updatedOn(group.getUpdatedOn())
-                .build();
-                return groupDto;
-    }
-
-    private GroupDto mapToGroupDto(Group group) {
-        GroupDto groupDto = GroupDto.builder()
-                .id(group.getId())
-                .title(group.getTitle())
-                .content(group.getContent())
-                .photoURL(group.getPhotoURL())
-                .createdOn(group.getCreatedOn())
-                .updatedOn(group.getUpdatedOn())
-                .build();
-        return groupDto;
-    }
 }

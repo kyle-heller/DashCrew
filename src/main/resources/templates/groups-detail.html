@@ -26,57 +26,24 @@
                     <div class="card mb-4">
                         <a href="#!"><img class="card-img-top" th:src="${group.photoURL}" alt="..." /></a>
                         <div class="card-body">
-                            <div class="small text-muted" th:text "${group.createdOn}"> </div>
+                            <div class="small text-muted" th:text="${group.createdOn}"> </div>
                             <h2 class="card-title">About this game</h2>
                             <p class="card-text" th:text="${group.content}"></p>
                             <a class="btn btn-primary" href="#!">Read more →</a>
                             <a class="btn btn-primary" th:href="@{/groups/{groupId}/delete(groupId=${group.id})}">Delete</a>
                             <a class="btn btn-primary" th:href="@{/events/{groupId}/new(groupId=${group.id})}">Create Event</a>
-
-                    </div>
+                        </div>
                     </div>
                     <!-- Nested row for non-featured blog posts-->
                     <div class="row">
                         <div class="col-lg-6">
                             <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                            <div th:each="event :${group.events}"  class="card mb-4">
+                                <a href="#!"><img class="card-img-top" th:src="${event.photoURL}" alt="..." /></a>
                                 <div class="card-body">
                                     <div class="small text-muted">January 1, 2023</div>
-                                    <h2 class="card-title h4">Event Title</h2>
+                                    <h2 th:text="${event.name}" class="card-title h4"></h2>
                                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <a class="btn btn-primary" href="#!">Read more →</a>
-                                </div>
-                            </div>
-                            <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">January 1, 2023</div>
-                                    <h2 class="card-title h4">Event Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <a class="btn btn-primary" href="#!">Read more →</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">January 1, 2023</div>
-                                    <h2 class="card-title h4">Event Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <a class="btn btn-primary" href="#!">Read more →</a>
-                                </div>
-                            </div>
-                            <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">January 1, 2023</div>
-                                    <h2 class="card-title h4">Event Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
                                     <a class="btn btn-primary" href="#!">Read more →</a>
                                 </div>
                             </div>
@@ -130,7 +97,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
     </section>
 </body>
 </html>
