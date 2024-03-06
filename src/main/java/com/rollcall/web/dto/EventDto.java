@@ -1,7 +1,6 @@
 package com.rollcall.web.dto;
 
 import com.rollcall.web.models.Group;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

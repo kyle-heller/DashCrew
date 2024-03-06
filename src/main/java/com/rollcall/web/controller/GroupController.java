@@ -3,13 +3,13 @@ package com.rollcall.web.controller;
 import com.rollcall.web.dto.GroupDto;
 import com.rollcall.web.models.Group;
 import com.rollcall.web.services.GroupService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
