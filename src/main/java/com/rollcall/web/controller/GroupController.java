@@ -41,7 +41,7 @@ public class GroupController {
             model.addAttribute("group",groupDto);
         }
         groupService.saveGroup(groupDto);
-        return "groups/create";
+        return "groups-create";
     }
 
     @GetMapping("/groups/search")

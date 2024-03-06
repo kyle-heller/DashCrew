@@ -14,6 +14,7 @@ public class GroupMapper {
                 .title(group.getTitle())
                 .content(group.getContent())
                 .photoURL(group.getPhotoURL())
+                .createdBy(group.getCreatedBy())
                 .createdOn(group.getCreatedOn())
                 .updatedOn(group.getUpdatedOn())
                 .build();
@@ -26,6 +27,7 @@ public class GroupMapper {
                 .title(group.getTitle())
                 .photoURL(group.getPhotoURL())
                 .content(group.getContent())
+                .createdBy(group.getCreatedBy())
                 .createdOn(group.getCreatedOn())
                 .updatedOn(group.getUpdatedOn())
                 .events(group.getEvents().stream().map((event) -> mapToEventDto(event)).collect(Collectors.toList()))

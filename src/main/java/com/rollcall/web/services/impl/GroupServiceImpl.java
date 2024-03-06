@@ -2,7 +2,10 @@ package com.rollcall.web.services.impl;
 
 import com.rollcall.web.models.Group;
 import com.rollcall.web.dto.GroupDto;
+import com.rollcall.web.models.UserEntity;
 import com.rollcall.web.repository.GroupRepository;
+import com.rollcall.web.repository.UserRepository;
+import com.rollcall.web.security.SecurityUtil;
 import com.rollcall.web.services.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +19,12 @@ import static com.rollcall.web.mapper.GroupMapper.mapToGroupDto;
 @Service
 public class GroupServiceImpl implements GroupService {
     private GroupRepository groupRepository;
+    private UserRepository userRepository;
 
 
     @Autowired
-    public GroupServiceImpl(GroupRepository groupRepository) {
+    public GroupServiceImpl(GroupRepository groupRepository, UserRepository userRepository) {
+        this.userRepository = userRepository;
         this.groupRepository = groupRepository;
     }
 
@@ -31,9 +36,21 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Group saveGroup(GroupDto groupDto) {
+        String username = SecurityUtil.getSessionUser();
+        UserEntity user = userRepository.findByUsername(username);
         Group group = mapToGroup(groupDto);
+        group.setCreatedBy(user);
         groupRepository.save(group);
         return null;
+    }
+
+    @Override
+    public void updateGroup(GroupDto groupDto) {
+        String username = SecurityUtil.getSessionUser();
+        UserEntity user = userRepository.findByUsername(username);
+        Group group = mapToGroup(groupDto);
+        group.setCreatedBy(user);
+        groupRepository.save(group);
     }
 
     @Override
@@ -42,11 +59,6 @@ public class GroupServiceImpl implements GroupService {
         return mapToGroupDto(group);
     }
 
-    @Override
-    public void updateGroup(GroupDto groupDto) {
-        Group group = mapToGroup(groupDto);
-        groupRepository.save(group);
-    }
 
     @Override
     public void deleteGroup(Long groupId) {
