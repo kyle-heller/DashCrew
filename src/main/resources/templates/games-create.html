@@ -1,10 +1,136 @@
-<!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <title>
+        Add Game
+    </title>
 </head>
-<body>
-$END$
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <!-- Page Content-->
+    <section layout:fragment="body" class="py-5">
+        <div class="container">
+            <form role="form" method="post" th:action="@{/games/newbgglink}" th:object="${game}">
+                <div class="form-group mb-3">
+                    <label for="bggLink">BoardGameGeek Link (optional)</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="bggLink"
+                            th:field="*{bggLink}"
+                            placeholder="Enter BoardGameGeek link">
+                            <p th:if="${#fields.hasErrors('bggLink')}" class="text-danger" th:errors="*{bggLink}"></p>
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+            <hr>
+            <p>or</p>
+
+            <form role="form" method="post" th:action="@{/games/new}" th:object="${game}">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="title">Title</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="title"
+                                th:field="*{title}"
+                                placeholder="Title">
+                        <p th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}"></p>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="photoURL">PhotoURL</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="photoURL"
+                                th:field="*{photoURL}"
+                                placeholder="Photo URL">
+                        <p th:if="${#fields.hasErrors('photoURL')}" class="text-danger" th:errors="*{photoURL}"></p>
+
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="description">Description</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="description"
+                            th:field="*{description}"
+                            placeholder="Description">
+                    <p th:if="${#fields.hasErrors('description')}" class="text-danger" th:errors="*{description}"></p>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="yearPublished">Year Published</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="yearPublished"
+                            th:field="*{yearPublished}"
+                            placeholder="yearPublished">
+                    <p th:if="${#fields.hasErrors('yearPublished')}" class="text-danger" th:errors="*{yearPublished}"></p>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="type">Type</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="type"
+                            th:field="*{type}"
+                            placeholder="type">
+                    <p th:if="${#fields.hasErrors('type')}" class="text-danger" th:errors="*{type}"></p>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="playingTime">Playing Time</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="playingTime"
+                            th:field="*{playingTime}"
+                            placeholder="playingTime">
+                    <p th:if="${#fields.hasErrors('playingTime')}" class="text-danger" th:errors="*{playingTime}"></p>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="minPlayers">Minimum Players</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="minPlayers"
+                            th:field="*{minPlayers}"
+                            placeholder="minPlayers">
+                    <p th:if="${#fields.hasErrors('minPlayers')}" class="text-danger" th:errors="*{minPlayers}"></p>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="minPlayers">Maximum Players</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="maxPlayers"
+                            th:field="*{maxPlayers}"
+                            placeholder="maxPlayers">
+                    <p th:if="${#fields.hasErrors('maxPlayers')}" class="text-danger" th:errors="*{maxPlayers}"></p>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="categories">Categories</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="categories"
+                            th:field="*{categories}"
+                            placeholder="categories">
+                    <p th:if="${#fields.hasErrors('categories')}" class="text-danger" th:errors="*{categories}"></p>
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+    </section>
+    <section class="py-5 bg-light">
+        <div class="container px-5 my-5">
+            <h2 class="display-4 fw-bolder mb-4">Let's build something together</h2>
+            <a class="btn btn-lg btn-primary" href="#!">Contact us</a>
+        </div>
+    </section>
+</main>
 </body>
 </html>

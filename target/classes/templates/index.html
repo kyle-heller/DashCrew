@@ -5,19 +5,61 @@
         <title>
             Home
         </title>
+
+        <style>
+            .index-img {
+                width: 100%; /* Makes image responsive */
+                height: 350px; /* Fixed height, adjust as needed */
+                object-fit: cover; /* Ensures image covers the area */
+                border-radius: .3rem; /* Matches Bootstrap's rounded-3 style */
+
+                .image-container {
+                    display: inline-block; /* or 'block' depending on your layout */
+                    border-radius: 20px/* Your desired border-radius value */;
+                    overflow: hidden; /* Ensures the shadow respects the border-radius */
+                }
+
+                .index-img {
+                    display: block;
+                    width: 100%; /* Responsive images */
+                    height: auto;
+                    border-radius: 100px /* Your desired border-radius value */;
+                    filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.6)); /* Adjust shadow to your preference */
+                }
+            }
+        </style>
     </head>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
             <!-- Page Content-->
-            <section layout:fragment="body" class="py-5 bg-dark-mode">
+            <section layout:fragment="body">
                 <div class="container px-5 my-5">
                     <div class="text-center mb-5">
                         <h1 class="fw-bolder" style="color:white">Welcome to Roll Call!</h1>
                         <p class="lead fw-normal text-muted mb-0">The easy way to find games and groups in your area</p>
                     </div>
-                    <div class="row gx-5">
-                        <div>
-                            <form th:action="@{/groups/search}" class="form-check-inline my-2 my-lg-0 mb-3">
+                    <div class="row gx-1">
+                        <div class="col-xl-4">
+                            <div class="image-container">
+                                <img src="/assets/CreateAccount.png" class="img-fluid index-img drop-shadow" alt="Create Account Icon">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="image-container">
+                                <img src="/assets/CreateGroup.png" class="img-fluid index-img drop-shadow" alt="Create Group Icon">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="image-container">
+                                <img src="/assets/JoinEvent.png" class="img-fluid index-img drop-shadow " alt="Join Event Icon">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <form th:action="@{/groups/search}" class="form-check-inline my-2 my-lg-0 mb-3">
                                 <input name="query" class="form-control mr-sm-2 mb-5" type="search" placeholder="Search gaming groups" aria-label="Search">
                             </form>
                         </div>

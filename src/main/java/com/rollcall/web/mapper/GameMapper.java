@@ -19,6 +19,7 @@ public class GameMapper {
                 .averageRating(gameDto.getAverageRating())
                 .photoURL(gameDto.getPhotoURL())
                 .description(gameDto.getDescription())
+                .bggLink(gameDto.getBggLink())
                 .build();
     }
 
@@ -36,6 +37,7 @@ public class GameMapper {
                 .averageRating(game.getAverageRating())
                 .photoURL(game.getPhotoURL())
                 .description(game.getDescription())
+                .bggLink(game.getBggLink())
                 .build();
     }
 }

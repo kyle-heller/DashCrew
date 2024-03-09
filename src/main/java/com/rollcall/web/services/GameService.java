@@ -2,14 +2,19 @@ package com.rollcall.web.services;
 
 import com.rollcall.web.dto.GameDto;
 import com.rollcall.web.dto.GroupDto;
+import com.rollcall.web.models.Game;
 import com.rollcall.web.models.Group;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.net.MalformedURLException;
 import java.util.List;
+@Service
 public interface GameService {
     List<GameDto> findAllGames();
 
-    Group saveGame(GameDto gameDto);
+    GameDto saveGame(GameDto gameDto);
 
     GameDto findByGameId(Long gameId);
 
@@ -18,4 +23,7 @@ public interface GameService {
     void deleteGame(Long gameId);
 
     List<GameDto> searchGames(String query);
+
+    Page<Game> findPaginated(Pageable pageable);
+
 }

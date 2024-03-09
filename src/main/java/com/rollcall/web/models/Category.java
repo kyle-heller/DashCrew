@@ -6,39 +6,49 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
-//bgg csv fields - name,game_id,type,rating,weight,year_published,min_players,max_players,min_play_time,max_play_time,min_age,owned_by,categories,mechanics,designers,artists,publishers
-
 @Entity
-@Table(name = "categories")
-public class Categories {
-@Id
-Long id;
 
-    CREATE TABLE category (
-            category_id INT AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(255) UNIQUE NOT NULL
-);
+public class Category {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
+    private String name;
 
-    Join Table
-    CREATE TABLE game_category (
-            game_id INT,
-            category_id INT,
-            PRIMARY KEY (game_id, category_id),
-    FOREIGN KEY (game_id) REFERENCES game(game_id),
-    FOREIGN KEY (category_id) REFERENCES category(category_id)
-            );
+    @ManyToMany(mappedBy = "categories")
+    private Set<Game> games = new HashSet<>();
+
+    @Override
+    public String toString() {
+        // Exclude games from the toString representation to avoid recursion
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return Objects.equals(id, category.id) &&
+                Objects.equals(name, category.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
+
 }

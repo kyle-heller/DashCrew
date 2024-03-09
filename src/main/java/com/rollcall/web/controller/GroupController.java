@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -40,6 +39,22 @@ public class GroupController {
         return "groups-list";
     }
 
+    @GetMapping("/groups/new")
+    public String createGroupForm(Model model) {
+        Group group = new Group();
+        model.addAttribute("group", group);
+        return "groups-create";
+    }
+
+    @PostMapping("groups/new")
+    public String saveGroupNew(@Valid @ModelAttribute("group") GroupDto groupDto, BindingResult result, Model model) {
+        if(result.hasErrors()) {
+            model.addAttribute("group",groupDto);
+        }
+        groupService.saveGroup(groupDto);
+        return "redirect:/groups?addsuccess";
+    }
+
     @GetMapping("/groups/{groupId}")
     public String groupDetail(@PathVariable("groupId") Long groupId, Model model) {
         UserEntity user = new UserEntity();
@@ -54,29 +69,6 @@ public class GroupController {
         return "groups-detail";
     }
 
-    @GetMapping("/groups/new")
-    public String createGroupForm(Model model) {
-        Group group = new Group();
-        model.addAttribute("group", group);
-        return "groups-create";
-    }
-
-    @PostMapping("groups/new")
-    public String saveClubNew(@Valid @ModelAttribute("club") GroupDto groupDto, BindingResult result, Model model) {
-        if(result.hasErrors()) {
-            model.addAttribute("group",groupDto);
-        }
-        groupService.saveGroup(groupDto);
-        return "groups-create";
-    }
-
-    @GetMapping("/groups/search")
-    public String searchGroups(@RequestParam(value = "query") String query, Model model) {
-        List<GroupDto> groups = groupService.searchGroups(query);
-        model.addAttribute("groups", groups);
-        return "groups-list";
-    }
-
     @GetMapping("/groups/{groupId}/edit")
     public String editGroupForm(@PathVariable("groupId") long groupId, Model model) {
         GroupDto group = groupService.findClubById(groupId);
@@ -86,8 +78,8 @@ public class GroupController {
 
     @PostMapping("/groups/{groupId}/edit")
     public String updateGroup(@PathVariable("groupId") Long groupId,
-                             @Valid @ModelAttribute("group") GroupDto group,
-                             BindingResult result, Model model) {
+                              @Valid @ModelAttribute("group") GroupDto group,
+                              BindingResult result, Model model) {
         if(result.hasErrors()) {
             model.addAttribute("group", group);
             return "groups-edit";
@@ -97,12 +89,25 @@ public class GroupController {
         return "redirect:/groups";
     }
 
-
     @GetMapping("groups/{groupId}/delete")
     public String deleteGroup(@PathVariable("groupId") Long groupId) {
         groupService.deleteGroup(groupId);
         return "redirect:/groups";
     }
 
-}
+    @GetMapping("/groups/search")
+    public String searchGroups(@RequestParam(value = "query") String query, Model model) {
+        List<GroupDto> groups = groupService.searchGroups(query);
 
+        UserEntity user = new UserEntity();
+        String username = SecurityUtil.getSessionUser();
+        if(username != null) {
+            user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        }
+        model.addAttribute("user", user);
+
+        model.addAttribute("groups", groups);
+        return "groups-list";
+    }
+}

@@ -27,15 +27,25 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Welcome</a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
                         <li><a class="dropdown-item" th:href="@{/groups/new}">Create Group</a></li>
+                        <li><a class="dropdown-item" th:href="@{/events/new}">Create Event</a></li>
+                        <li><a class="dropdown-item" th:href="@{/games/new}">Add Game</a></li>
                         <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
                     </ul>
                 </li>
             </ul>
+            <div class="select">
+                <i class="material-icons"></i>
+                <select class="select__input" id="selTheme">
+                    <option value="auto">Auto</option>
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+            </div>
         </div>
     </div>
 </nav>
 <body layout:fragment="body"></body>
-<section class="py-5 bg-light">
+<section class="py-5">
 </section>
 <footer class="bg-dark py-4 mt-auto">
     <div class="container px-5">

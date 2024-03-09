@@ -3,6 +3,8 @@ package com.rollcall.web.services;
 import com.rollcall.web.dto.RegistrationDto;
 import com.rollcall.web.models.UserEntity;
 
+import java.util.Optional;
+
 public interface UserService {
     void saveUser(RegistrationDto registrationDto);
 

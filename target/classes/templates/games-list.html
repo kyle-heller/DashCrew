@@ -2,6 +2,15 @@
       xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
+    <style>
+        .game-img {
+            width: 100%; /* Makes image responsive */
+            height: 250px; /* Fixed height, adjust as needed */
+            object-fit: cover; /* Ensures image covers the area */
+            border-radius: .3rem; /* Matches Bootstrap's rounded-3 style */
+        }
+    </style>
+
     <title>
         Games List
     </title>
@@ -20,20 +29,28 @@
                     <div class="row">
                         <div th:each="game : ${games}" class="col-lg-3 col-md-4 col-sm-6 mb-2">
                             <div class="position-relative mb-3">
-                                <a th:text="${game.title}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" th:href="@{/games/{gameId}(gameId=${game.id})}"></a>
-                                <img class="img-fluid rounded-3 mb-3 game-img" th:src="${game.photoURL}" alt="..." />
+                                <a th:text="${#strings.abbreviate(game.title, 20)}" class="h4 fw-bolder text-decoration-none link-dark stretched-link" th:href="@{/games/{gameId}(gameId=${game.id})}"></a>
+                                <img class="rounded-3 mb-3 game-img" th:src="${game.photoURL}" alt="..." />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <section class="py-5 bg-light">
-        <div class="container px-5 my-5">
-            <h2 class="display-4 fw-bolder mb-4">Let's build something together</h2>
-            <a class="btn btn-lg btn-primary" href="#!">Contact us</a>
-        </div>
+        <nav aria-label="Pagination">
+            <hr class="my-0" />
+            <ul class="pagination justify-content-center my-4">
+                <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+                    <a class="page-link" th:href="@{/games(page=${currentPage - 1}, size=${20})}" tabindex="-1" aria-disabled="true">Newer</a>
+                </li>
+                <li th:each="i : ${#numbers.sequence(1, totalPages)}" class="page-item" th:classappend="${currentPage == i} ? 'active'">
+                    <a class="page-link" th:href="@{/games(page=${i}, size=${20})}" th:text="${i}">Page number</a>
+                </li>
+                <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                    <a class="page-link" th:href="@{/games(page=${currentPage + 1}, size=${20})}">Older</a>
+                </li>
+            </ul>
+        </nav>
     </section>
 </main>
 </body>

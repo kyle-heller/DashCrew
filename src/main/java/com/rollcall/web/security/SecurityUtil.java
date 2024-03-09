@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class SecurityUtil {
     public static String getSessionUser() {
+        // Retrieves the current Authentication object from the SecurityContextHolder
         Authentication authentication  = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUserName = authentication.getName();
