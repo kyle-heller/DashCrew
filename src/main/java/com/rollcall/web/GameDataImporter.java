@@ -1,6 +1,6 @@
 //package com.rollcall.web;
 //
-//import com.rollcall.web.services.impl.GameImportServiceImpl;
+//import com.rollcall.web.services.external.BggApiServiceImpl;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.CommandLineRunner;
 //import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@
 //public class GameDataImporter implements CommandLineRunner {
 //
 //    @Autowired
-//    private GameImportServiceImpl gameImportServiceImpl;
+//    private BggApiServiceImpl gameImportServiceImpl;
 //
 //    @Autowired
 //    private JdbcTemplate jdbcTemplate;

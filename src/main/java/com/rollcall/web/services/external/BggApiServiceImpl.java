@@ -228,7 +228,7 @@ public class BggApiServiceImpl implements BggApiService {
                 fetchAndUpdateGamePhotoUrl(bggId); // Fetch and update photo URL
                 // Additional sleep to prevent rate limit issues, handle InterruptedException
                 try {
-                    Thread.sleep(1000); // Consider removing or adjusting sleep based on actual rate limit policies
+                    Thread.sleep(1500); // Consider removing or adjusting sleep based on actual rate limit policies
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
