@@ -55,14 +55,7 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-                    <form th:action="@{/groups/search}" class="form-check-inline my-2 my-lg-0 mb-3">
-                                <input name="query" class="form-control mr-sm-2 mb-5" type="search" placeholder="Search gaming groups" aria-label="Search">
-                            </form>
-                        </div>
+                </div>
                         <div th:each="group :${groups}" class="col-lg-6 mb-2">
                             <div class="position-relative mb-3">
                                 <img class="img-fluid rounded-3 mb-3" th:src="${group.photoURL}" alt="..." />
