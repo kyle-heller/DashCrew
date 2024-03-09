@@ -46,7 +46,7 @@ public class EventController {
     @PostMapping("/events/{groupId}")
     public String createEvent(@PathVariable("groupId") Long groupId, @ModelAttribute("event") EventDto eventDto) {
         eventService.createEvent(groupId, eventDto);
-        return "redirect:/groups/" + groupId;
+        return "redirect:/groups/" + groupId +"?success";
     }
 
     @GetMapping("/events/{eventId}")

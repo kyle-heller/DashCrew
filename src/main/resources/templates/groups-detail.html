@@ -12,8 +12,12 @@
         <header class="py-5 bg-light border-bottom mb-4">
             <div class="container">
                 <div class="text-center my-5">
+                    <div th:if="${param.success}" class="alert alert-success">
+                        Created succesfully!
+                    </div>
                     <h1 class="fw-bolder" th:text=${group.title}></h1>
                     <p class="lead mb-0">Columbus, OH</p>
+
                 </div>
             </div>
         </header>
