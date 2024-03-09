@@ -79,6 +79,78 @@
   --bs-highlight-bg: #fff3cd;
 }
 
+
+#darkmode-toggle + label {
+  width: 50px;
+  height: 25px;
+  position: relative;
+  display: inline-block;
+  background: #ebebeb;
+  border-radius: 15px; /* Adjusted for better proportion */
+  box-shadow: inset 0px 2px 8px rgba(0,0,0,0.4), inset 0px -2px 8px rgba(255,255,255,0.4); /* Adjusted for better proportion */
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#darkmode-toggle + label:after {
+  content: "";
+  width: 21px; /* Adjusted proportionally */
+  height: 21px; /* Adjusted proportionally */
+  position: absolute;
+  top: 2px; /* Adjusted proportionally */
+  left: 3px; /* Adjusted proportionally */
+  background: linear-gradient(180deg, #ffcc89, #d8860b);
+  border-radius: 9px; /* Adjusted for better proportion */
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.2); /* Adjusted for better proportion */
+  transition: 0.3s;
+}
+
+#darkmode-toggle {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+
+#darkmode-toggle:checked + label:after {
+  left: 48px; /* Adjusted proportionally */
+  transform: translateX(-100%);
+  background: linear-gradient(180deg, #777, #0a0a0a);
+}
+
+#darkmode-toggle + label svg {
+  position: absolute;
+  width: 20px; /* Adjusted width of SVG */
+  height: 20px; /* Adjusted height of SVG */
+  top: 5px; /* Adjusted top position to center vertically */
+  left: 5px; /* Adjusted left position to align with the left side of the toggle */
+  z-index: 100;
+  fill: #ffffff;
+}
+#darkmode-toggle + label svg.sun {
+  left: 31px; /* Adjusted proportionally */
+  width: 15px; /* Adjusted width of SVG */
+  height: 15px; /* Adjusted height of SVG */
+  fill: #ffffff;
+  transition: 0.3s;
+}
+
+#darkmode-toggle + label svg.moon {
+  left: 3.5px; /* Adjusted proportionally */
+  top: 2.4px;
+  fill: #7e7e7e;
+  transition: 0.3s;
+}
+
+#darkmode-toggle:checked + label svg.sun {
+  fill: #ffffff;
+}
+
+#darkmode-toggle:checked + label svg.moon {
+  fill: #fff;
+}
+
+
+
 *,
 *::before,
 *::after {
