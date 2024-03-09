@@ -1,6 +1,7 @@
 package com.rollcall.web.services;
 
 import com.rollcall.web.dto.RegistrationDto;
+import com.rollcall.web.dto.UserProfileDto;
 import com.rollcall.web.models.UserEntity;
 
 import java.util.Optional;
@@ -11,4 +12,6 @@ public interface UserService {
     UserEntity findByEmail(String email);
 
     UserEntity findByUsername(String username);
+
+    void updateUserProfile(UserProfileDto userProfileDto);
 }

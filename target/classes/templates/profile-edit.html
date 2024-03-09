@@ -1,0 +1,91 @@
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<script>
+    function selectAvatar(avatar) {
+        // Set the selected avatar value
+        document.getElementById('selectedAvatar').value = avatar;
+    }
+</script>
+
+<head>
+    <title>Group Update</title>
+    <style>
+        .avatar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            grid-gap: 10px;
+        }
+
+        .avatar-option {
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .avatar-option img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Add border for selected avatar */
+        .selected-avatar {
+            border: 2px solid blue;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <!-- Page Content-->
+    <section layout:fragment="body" class="py-5">
+        <div class="container">
+            <form role="form" method="post" th:action="@{/profile/edit}">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="aboutMe">About Me</label>
+                        <input type="text" class="form-control" id="aboutMe" th:field="${userProfileDto.aboutMe}" placeholder="About Me">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="interests">Interests</label>
+                        <input type="text" class="form-control" id="interests" th:field="${userProfileDto.interests}" placeholder="Interests">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="zip">Zipcode</label>
+                        <input type="text" class="form-control" id="zip" th:field="${userProfileDto.zip}" placeholder="Zipcode">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="darkMode">Dark Mode</label>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="darkMode" th:field="${userProfileDto.darkMode}">
+                            <label class="form-check-label" for="darkMode">Enable Dark Mode</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Choose Avatar:</label>
+                        <div class="avatar-grid">
+                            <!-- Loop through avatar files and generate HTML elements for each -->
+                            <div th:each="avatar : ${avatarFiles}" class="avatar-option" onclick="selectAvatar('${avatar}')">
+                                <!-- Use th:src to set the image source dynamically -->
+                                <img th:src="@{'/assets/avatars/' + ${avatar}}" th:alt="${avatar}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Hidden input field to store selected avatar path -->
+                <input type="hidden" id="selectedAvatar" name="selectedAvatar" th:value="${userProfileDto.selectedAvatar}">
+                <!-- Other form fields... -->
+            </form>
+        </div>
+    </section>
+</main>
+</body>
+</html>

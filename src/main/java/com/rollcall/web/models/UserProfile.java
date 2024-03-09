@@ -1,9 +1,6 @@
 package com.rollcall.web.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,14 +10,17 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Builder
 @Entity(name = "profiles")
 public class UserProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
+    @Column(columnDefinition = "TEXT")
     private String aboutMe;
+    @Column(columnDefinition = "TEXT")
     private String interests;
+    private String photoURL;
     private boolean darkMode;
     private int zip;
 

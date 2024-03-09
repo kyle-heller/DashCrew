@@ -1,81 +1,65 @@
 <html xmlns:th="http://thymeleaf.org"
       xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
-    <head>
-        <title>
-            Home
-        </title>
-
-        <style>
-            .index-img {
-                width: 100%; /* Makes image responsive */
-                height: 350px; /* Fixed height, adjust as needed */
-                object-fit: cover; /* Ensures image covers the area */
-                border-radius: .3rem; /* Matches Bootstrap's rounded-3 style */
-
-                .image-container {
-                    display: inline-block; /* or 'block' depending on your layout */
-                    border-radius: 20px/* Your desired border-radius value */;
-                    overflow: hidden; /* Ensures the shadow respects the border-radius */
-                }
-
-                .index-img {
-                    display: block;
-                    width: 100%; /* Responsive images */
-                    height: auto;
-                    border-radius: 100px /* Your desired border-radius value */;
-                    filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.6)); /* Adjust shadow to your preference */
-                }
-            }
-        </style>
-    </head>
-    <body class="d-flex flex-column h-100">
-        <main class="flex-shrink-0">
-            <!-- Page Content-->
-            <section layout:fragment="body">
-                <div class="container px-5 my-5">
-                    <div class="text-center mb-5">
-                        <h1 class="fw-bolder" style="color:white">Welcome to Roll Call!</h1>
-                        <p class="lead fw-normal text-muted mb-0">The easy way to find games and groups in your area</p>
+<head>
+    <title>
+        Home
+    </title>
+    <style>
+        .index-img {
+            width: 100%;
+            height: auto; /* Ensure the aspect ratio of the image is maintained */
+            border-radius: 20px;
+            object-fit: cover; /* Ensure the image covers the container */
+        }
+    </style>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <!-- Page Content-->
+    <section layout:fragment="body">
+        <div class="container px-5 my-5">
+            <div class="text-center mb-5">
+                <h1 class="fw-bolder">Welcome to Roll Call!</h1>
+                <p class="lead fw-normal text-muted mb-0">The easy way to find games and groups in your area</p>
+            </div>
+            <div class="row gx-5">
+                <div class="col-xl-4 text-center">
+                    <div class="image-container">
+                        <a href="/register"><img src="/assets/CreateAccount.png" class="img-fluid index-img drop-shadow" alt="Create Account Icon"></a>
                     </div>
-                    <div class="row gx-1">
-                        <div class="col-xl-4">
-                            <div class="image-container">
-                                <img src="/assets/CreateAccount.png" class="img-fluid index-img drop-shadow" alt="Create Account Icon">
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="image-container">
-                                <img src="/assets/CreateGroup.png" class="img-fluid index-img drop-shadow" alt="Create Group Icon">
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="image-container">
-                                <img src="/assets/JoinEvent.png" class="img-fluid index-img drop-shadow " alt="Join Event Icon">
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                    <form th:action="@{/groups/search}" class="form-check-inline my-2 my-lg-0 mb-3">
-                                <input name="query" class="form-control mr-sm-2 mb-5" type="search" placeholder="Search gaming groups" aria-label="Search">
-                            </form>
-                        </div>
-                        <div th:each="group :${groups}" class="col-lg-6 mb-2">
-                            <div class="position-relative mb-3">
-                                <img class="img-fluid rounded-3 mb-3" th:src="${group.photoURL}" alt="..." />
-                                <a th:text="${group.title}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
-                            </div>
-                            <a class="btn btn-primary" th:href="@{/groups/{groupId}(groupId=${group.id})}">View</a>
-                            <div th:if="${user.id} == ${group.createdBy.id}">
-                                <a class="btn btn-primary" th:href="@{/groups/{groupId}/edit(groupId=${group.id})}">Edit</a>
-                            </div>
-                        </div>
-                    </div>
+                    <p class="mt-3"><i>"Start your adventure by signing up and unlocking the door to gaming communities and events.</i>"</p>
                 </div>
-            </section>
-        </main>
-    </body>
+                <div class="col-sm-4 text-center">
+                    <div class="image-container">
+                        <a href="/groups"><img src="/assets/CreateGroup.png" class="img-fluid index-img drop-shadow" alt="Create Group Icon"></a>
+                    </div>
+                    <p class="mt-3"><i>"Forge alliances or join fellow gamers in existing parties to explore and conquer."</i></p>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <div class="image-container">
+                        <a href="/events"><img src="/assets/JoinEvent.png" class="img-fluid index-img drop-shadow " alt="Join Event Icon"></a>
+                    </div>
+                    <p class="mt-3"><i>"Grab your quill and enroll in quests to make your mark in the gaming world.</i>"</p>
+                </div>
+            </div>
+            <form th:action="@{/groups/search}" class="form-check-inline my-2 my-lg-0 mb-3">
+                <input name="query" class="form-control mr-sm-2 mb-5" type="search" placeholder="Search gaming groups" aria-label="Search">
+            </form>
+        </div>
+        <div th:each="group :${groups}" class="col-lg-6 mb-2">
+            <div class="position-relative mb-3">
+                <img class="img-fluid rounded-3 mb-3" th:src="${group.photoURL}" alt="..." />
+                <a th:text="${group.title}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
+            </div>
+            <a class="btn btn-primary" th:href="@{/groups/{groupId}(groupId=${group.id})}">View</a>
+            <div th:if="${user.id} == ${group.createdBy.id}">
+                <a class="btn btn-primary" th:href="@{/groups/{groupId}/edit(groupId=${group.id})}">Edit</a>
+            </div>
+        </div>
+        </div>
+        </div>
+    </section>
+</main>
+</body>
 </html>
