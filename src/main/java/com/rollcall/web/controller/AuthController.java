@@ -20,6 +20,17 @@ public class AuthController {
         this.userService = userService;
     }
 
+
+    @GetMapping(value = "/ssl-test")
+    public String inbound(){
+        return "Inbound TLS is working!!";
+    }
+
+    @GetMapping(value = "/exit")
+    public void exit() {
+        System.exit(0);
+    }
+
     @GetMapping("/register")
     public String getRegisterForm(Model model) {
         RegistrationDto user = new RegistrationDto();
