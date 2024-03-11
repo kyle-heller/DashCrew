@@ -20,6 +20,7 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    private Integer zip;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String type;
@@ -32,4 +33,9 @@ public class Event {
     @ManyToOne
     @JoinColumn(name="group_id", nullable = false)
     private Group group;
+
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "game_id", referencedColumnName = "id")
+    private Game game;
 }

@@ -15,58 +15,35 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Name</label>
-                        <input
-                                type="text"
-                                class="form-control"
-                                id="name"
-                                name="title"
-                                th:field="*{name}"
-                                placeholder="Event name">
+                        <input type="text" class="form-control" id="name" name="name" th:field="*{name}" placeholder="Event name">
                         <p th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></p>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="type">Type</label>
-                        <input
-                                type="text"
-                                class="form-control"
-                                id="type"
-                                name="photoURL"
-                                th:field="*{type}"
-                                placeholder="Event type">
+                        <input type="text" class="form-control" id="type" name="type" th:field="*{type}" placeholder="Event type">
                         <p th:if="${#fields.hasErrors('type')}" class="text-danger" th:errors="*{type}"></p>
                     </div>
                 </div>
                 <div class="form-group mb-3">
                     <label for="photoURL">PhotoURL</label>
-                    <input
-                            type="text"
-                            class="form-control"
-                            id="photoURL"
-                            name="photoURL"
-                            th:field="*{photoURL}"
-                            placeholder="PhotoURL">
+                    <input type="text" class="form-control" id="photoURL" name="photoURL" th:field="*{photoURL}" placeholder="PhotoURL">
                     <p th:if="${#fields.hasErrors('photoURL')}" class="text-danger" th:errors="*{photoURL}"></p>
                 </div>
                 <div class="form-group mb-3">
+                    <label for="gameSelect">Game</label>
+                    <select id="gameSelect" class="form-control" th:field="*{game}">
+                        <option value="Choose Game" selected>Choose Game</option>
+                        <option value="" th:each="game : ${gameList}" th:value="${game.id}" th:text="${game.title}">Game Title</option>
+                    </select>
+                    <a href="/games/new" class="btn btn-link" style="font-size: smaller">or click here to add a new game</a>
+                    <div class="form-group mb-3">
                     <label for="startTime">Start Time</label>
-                    <input
-                            type="datetime-local"
-                            class="form-control"
-                            id="startTime"
-                            name="startTime"
-                            th:field="*{startTime}"
-                            placeholder="Start Time">
+                    <input type="datetime-local" class="form-control" id="startTime" name="startTime" th:field="*{startTime}" placeholder="Start Time">
                     <p th:if="${#fields.hasErrors('startTime')}" class="text-danger" th:errors="*{startTime}"></p>
                 </div>
-                <div class="form-group mb-3">
+                    <div class="form-group mb-3">
                     <label for="endTime">End Time</label>
-                    <input
-                            type="datetime-local"
-                            class="form-control"
-                            id="endTime"
-                            name="endTime"
-                            th:field="*{endTime}"
-                            placeholder="End Time">
+                    <input type="datetime-local" class="form-control" id="endTime" name="endTime" th:field="*{endTime}" placeholder="End Time">
                     <p th:if="${#fields.hasErrors('endTime')}" class="text-danger" th:errors="*{endTime}"></p>
                 </div>
                 <button type="submit" class="btn btn-primary">Create</button>

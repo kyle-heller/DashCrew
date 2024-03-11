@@ -9,6 +9,7 @@ public class EventMapper {
         return Event.builder()
                 .id(eventDto.getId())
                 .name(eventDto.getName())
+                .zip(eventDto.getZip())
                 .startTime(eventDto.getStartTime())
                 .endTime(eventDto.getEndTime())
                 .type(eventDto.getType())
@@ -16,6 +17,7 @@ public class EventMapper {
                 .createdOn(eventDto.getCreatedOn())
                 .updatedOn(eventDto.getUpdatedOn())
                 .group(eventDto.getGroup())
+                .game(eventDto.getGame())
                 .build();
     }
 
@@ -23,6 +25,7 @@ public class EventMapper {
         return EventDto.builder()
                 .id(event.getId())
                 .name(event.getName())
+                .zip(event.getZip())
                 .startTime(event.getStartTime())
                 .endTime(event.getEndTime())
                 .type(event.getType())
@@ -30,6 +33,7 @@ public class EventMapper {
                 .createdOn(event.getCreatedOn())
                 .updatedOn(event.getUpdatedOn())
                 .group(event.getGroup())
+                .game(event.getGame())
                 .build();
     }
 
