@@ -8,29 +8,29 @@ Check it out live! http://rollcall.site/
 
 - **Group Management**: Users can create, search, edit, and delete groups. Each group can host multiple events, creating a mini-community within the platform.
 
-  <img src="telegram-cloud-photo-size-1-5150385036468530129-y.jpg" alt="drawing" width="300"/><br><br>
+  <img src="telegram-cloud-photo-size-1-5150385036468530129-y.jpg" alt="drawing" width="500"/><br><br>
 
 
 - **Event Management**: Users can create, edit, and delete events within groups. Events can be viewed in a detailed list with information such as the event name, start and end times, and associated group.
 
-  <img src="image-1.png" alt="drawing" width="300"/> <br><br>
+  <img src="image-1.png" alt="drawing" width="500"/> <br><br>
 
 
 - **User Authentication**: Secure login and registration system to manage user access.
 
-  <img src="image.png" alt="drawing" width="300"/> <br><br>
+  <img src="image.png" alt="drawing" width="500"/> <br><br>
 
 - **Profile Management**: Users can manage their profiles, including credentials and participation in events and groups.
 
-  <img src="image-2.png" alt="drawing" width="300"/> <br><br>
+  <img src="image-2.png" alt="drawing" width="500"/> <br><br>
 
 - **Game Addition by Users with Integration with BoardGameGeek API**: Users can suggest new games to be added to the platform's catalog, pending approval by administrators. This feature encourages community involvement in growing the game database. Games can be entered manually or via boardgamegeek website which integrates with the bgg api to pull game details!
 
-  <img src="image-3.png" alt="drawing" width="300"/><br><br>
+  <img src="image-3.png" alt="drawing" width="500"/><br><br>
 
 - **Game Catalog**: Introduce a comprehensive list of board games, role-playing games, and card games. Each event will be able to associate itself with a game from this catalog, enhancing event details and user experience.
 
-  <img src="image-4.png" alt="drawing" width="300"/><br><br>
+  <img src="image-4.png" alt="drawing" width="500"/><br><br>
 
 ## Planned Features
 
