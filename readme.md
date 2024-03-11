@@ -13,13 +13,12 @@ Check it out live! http://rollcall.site/
 
 - **Event Management**: Users can create, edit, and delete events within groups. Events can be viewed in a detailed list with information such as the event name, start and end times, and associated group.
 
-      <img src="image-1.png" alt="drawing" width="300"/>
+  <img src="image-1.png" alt="drawing" width="300"/> <br><br>
 
-  <br>
 
 - **User Authentication**: Secure login and registration system to manage user access.
 
-  ![alt text](image.png)<br><br>
+  <img src="image.png" alt="drawing" width="300"/> <br><br>
 
 - **Profile Management**: Users can manage their profiles, including credentials and participation in events and groups.
 
