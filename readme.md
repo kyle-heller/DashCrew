@@ -8,7 +8,8 @@ Check it out live! http://rollcall.site/
 
 - **Group Management**: Users can create, search, edit, and delete groups. Each group can host multiple events, creating a mini-community within the platform.
 
-![alt text](telegram-cloud-photo-size-1-5150385036468530129-y.jpg)
+  <img src="telegram-cloud-photo-size-1-5150385036468530129-y.jpg" alt="drawing" width="300"/><br><br>
+
 
 - **Event Management**: Users can create, edit, and delete events within groups. Events can be viewed in a detailed list with information such as the event name, start and end times, and associated group.
 
