@@ -12,6 +12,7 @@ import java.util.Optional;
 @Repository
 public interface GroupRepository extends JpaRepository<Group, Long> {
     Optional<Group> findByTitle(String url);
-    @Query("SELECT c from Group c WHERE c.title LIKE CONCAT('%', :query, '%')")
+    @Query("SELECT c FROM Group c WHERE LOWER(c.title) LIKE LOWER(CONCAT('%', :query, '%'))")
     List<Group> searchGroups(@Param("query") String query);
+
 }
