@@ -1,7 +1,10 @@
 package com.rollcall.web.controller;
 
 import com.rollcall.web.dto.GameDto;
+import com.rollcall.web.dto.GroupDto;
 import com.rollcall.web.models.Game;
+import com.rollcall.web.models.UserEntity;
+import com.rollcall.web.security.SecurityUtil;
 import com.rollcall.web.services.GameService;
 import com.rollcall.web.services.UserService;
 import com.rollcall.web.services.external.BggApiServiceImpl;
@@ -14,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -80,5 +84,18 @@ public class GameController {
         model.addAttribute("game", game);
         model.addAttribute("gameTitle", game.getTitle());
         return "games-detail";
+    }
+
+    @GetMapping("/games/search")
+    public String searchGroups(@RequestParam(value = "query") String query, Model model) {
+        List<GameDto> games = gameService.searchGames(query);
+
+        System.out.println(games);
+
+        model.addAttribute("games", games);
+        model.addAttribute("currentPage", 1);
+        model.addAttribute("totalPages", 1);
+
+        return "games-list";
     }
 }

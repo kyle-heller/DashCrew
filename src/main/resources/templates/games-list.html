@@ -25,6 +25,11 @@
                 <p class="lead fw-normal text-muted mb-0">Browse the catalogue</p>
             </div>
             <div class="row gx-5">
+                <div>
+                    <form th:action="@{/games/search}" class="form-check-inline my-2 my-lg-0 mb-3">
+                        <input name="query" class="form-control mr-sm-2 mb-5" type="search" placeholder="Search games" aria-label="Search">
+                    </form>
+                </div>
                 <div class="container">
                     <div class="row">
                         <div th:each="game : ${games}" class="col-lg-3 col-md-4 col-sm-6 mb-2">

@@ -3,6 +3,7 @@ package com.rollcall.web.services.impl;
 import com.rollcall.web.dto.GameDto;
 import com.rollcall.web.mapper.GameMapper;
 import com.rollcall.web.models.Game;
+import com.rollcall.web.models.Group;
 import com.rollcall.web.models.UserEntity;
 import com.rollcall.web.repository.CategoryRepository;
 import com.rollcall.web.repository.GameRepository;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 
 import static com.rollcall.web.mapper.GameMapper.mapToGame;
 import static com.rollcall.web.mapper.GameMapper.mapToGameDto;
+import static com.rollcall.web.mapper.GroupMapper.mapToGroupDto;
 
 @Service
 @RequiredArgsConstructor
@@ -28,8 +30,6 @@ public class GameServiceImpl implements GameService {
 
     private final GameRepository gameRepository;
     private final UserRepository userRepository;
-    private final BggApiService bggApiService; // Use the interface here
-    private final CategoryRepository categoryRepository;
 
     @Override //fetches a page of Game entities from the database
     public Page<Game> findPaginated(Pageable pageable) {
@@ -69,7 +69,7 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public List<GameDto> searchGames(String query) {
-        // Implementation for search
-        return null;
+        List<Game> games = gameRepository.searchGames(query);
+        return games.stream().map(game -> mapToGameDto(game)).collect(Collectors.toList());
     }
 }
