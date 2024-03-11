@@ -29,8 +29,11 @@
             <div class="row gx-5">
                 <div th:each="group :${groups}" class="col-lg-3 col-md-4 col-sm-6 mb-2">
                     <div class="position-relative mb-3">
-                        <img class="img-fluid rounded-3 mb-3" th:src="${group.photoURL}" alt="..." />
-                        <a th:text="${group.title}" class="h3 fw-bolder text-decoration-none stretched-link" href="#!">Project name</a>
+                        <a th:href="@{/groups/{groupId}(groupId=${group.id})}">
+                            <img class="img-fluid rounded-3 mb-3" th:src="${group.photoURL}" alt="..." />
+                        </a>
+                        <!-- Adjust the text link to lead to the group's detail page -->
+                        <a th:text="${group.title}" class="h3 fw-bolder text-decoration-none" th:href="@{/groups/{groupId}(groupId=${group.id})}"></a>
                     </div>
                     <a class="btn btn-primary" th:href="@{/groups/{groupId}(groupId=${group.id})}">View</a>
                     <a class="btn btn-primary" th:if="${user.id} == ${group.createdBy.id}" th:href="@{/groups/{groupId}/edit(groupId=${group.id})}">Edit</a>

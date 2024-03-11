@@ -37,6 +37,7 @@
                                 <a th:text="${#strings.abbreviate(game.title, 20)}" class="h4 fw-bolder text-decoration-none stretched-link" th:href="@{/games/{gameId}(gameId=${game.id})}"></a>
                                 <img class="rounded-3 mb-3 game-img" th:src="${game.photoURL}" alt="..." />
                             </div>
+
                         </div>
                     </div>
                 </div>
