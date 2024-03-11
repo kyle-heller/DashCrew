@@ -1,11 +1,13 @@
 package com.rollcall.web.controller;
 
 import com.rollcall.web.dto.EventDto;
+import com.rollcall.web.dto.GameDto;
 import com.rollcall.web.dto.GroupDto;
 import com.rollcall.web.models.Event;
 import com.rollcall.web.models.UserEntity;
 import com.rollcall.web.security.SecurityUtil;
 import com.rollcall.web.services.EventService;
+import com.rollcall.web.services.GameService;
 import com.rollcall.web.services.GroupService;
 import com.rollcall.web.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +27,13 @@ public class EventController {
     private final EventService eventService;
     private final UserService userService;
     private final GroupService groupService;
+    private final GameService gameService;
 
-    public EventController(EventService eventService, UserService userService, GroupService groupService) {
+    public EventController(EventService eventService, UserService userService, GroupService groupService, GameService gameService) {
         this.eventService = eventService;
         this.userService = userService;
         this.groupService = groupService;
+        this.gameService = gameService;
     }
 
     @GetMapping("/events")
@@ -43,6 +47,8 @@ public class EventController {
 
     @GetMapping("/events/{groupId}/new")
     public String createEventForm(@PathVariable("groupId") Long groupId, Model model) {
+        List<GameDto> games = gameService.findAllGames();
+        model.addAttribute("gameList", games);
         model.addAttribute("groupId", groupId);
         model.addAttribute("event", new Event());
         return "events-create";
