@@ -80,7 +80,10 @@
     --bs-body-text-align: left; /* or 'center', 'right', etc., depending on your design */
 }
 
-
+@media only screen and (max-width: 600px) {
+    body {
+    }
+}
 .dark-mode {
     background-color: rgba(0,2,11,.88);
     color: white;
