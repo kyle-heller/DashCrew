@@ -42,5 +42,5 @@ Check it out live! http://rollcall.site/
 ## Technical Details
 
 - **Backend**: The application is built on the Spring Boot framework, utilizing Spring Security for authentication and authorization.
-- **Database**: Uses JPA repositories with Hibernate for ORM, supporting a relational database management system (RDBMS) such as MySQL or PostgreSQL.
+- **Database**: Uses JPA repositories with Hibernate for ORM, supporting a relational database management system (RDBMS) such as MySQL or PostgreSQL. In my implementation I'm using PostGres.
 - **Frontend**: Thymeleaf templates for rendering server-side HTML, integrated with Bootstrap for responsive design.
