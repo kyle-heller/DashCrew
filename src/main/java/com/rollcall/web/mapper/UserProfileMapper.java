@@ -1,8 +1,6 @@
 package com.rollcall.web.mapper;
 
-import com.rollcall.web.dto.GameDto;
 import com.rollcall.web.dto.UserProfileDto;
-import com.rollcall.web.models.Game;
 import com.rollcall.web.models.UserProfile;
 
 public class UserProfileMapper {
@@ -18,7 +16,7 @@ public class UserProfileMapper {
                 .build();
     }
 
-    public static UserProfileDto mapToGameDto(UserProfile userProfile) {
+    public static UserProfileDto mapToUserProfileDto(UserProfile userProfile) {
         return UserProfileDto.builder()
                 .Id(userProfile.getId())
                 .aboutMe(userProfile.getAboutMe())

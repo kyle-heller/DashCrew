@@ -6,7 +6,7 @@
          Group List
      </title>
  </head>
-<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column h-100 dark-theme">
 <main class="flex-shrink-0">
     <!-- Page Content-->
     <section layout:fragment="body" class="py-5">
@@ -30,7 +30,7 @@
                 <div th:each="group :${groups}" class="col-lg-3 col-md-4 col-sm-6 mb-2">
                     <div class="position-relative mb-3">
                         <img class="img-fluid rounded-3 mb-3" th:src="${group.photoURL}" alt="..." />
-                        <a th:text="${group.title}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
+                        <a th:text="${group.title}" class="h3 fw-bolder text-decoration-none stretched-link" href="#!">Project name</a>
                     </div>
                     <a class="btn btn-primary" th:href="@{/groups/{groupId}(groupId=${group.id})}">View</a>
                     <a class="btn btn-primary" th:if="${user.id} == ${group.createdBy.id}" th:href="@{/groups/{groupId}/edit(groupId=${group.id})}">Edit</a>

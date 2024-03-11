@@ -19,7 +19,7 @@
                 <div th:each="event :${events}" class="col-lg-3 col-md-4 col-sm-6 mb-2">
                     <div class="position-relative mb-3">
                         <img class="img-fluid rounded-3 mb-3" th:src="${event.photoURL}" alt="..." />
-                        <a th:text="${event.name}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!"></a>
+                        <a th:text="${event.name}" class="h3 fw-bolder text-decoration-none stretched-link" href="#!"></a>
                     </div>
                     <a th:href="@{/events/{eventId}(eventId=${event.id})}" class="btn btn-primary">View</a>
                     <a th:if="${user.id} == ${event.group.createdBy.id}" th:href="@{/events/{eventId}/edit(eventId=${event.id})}" class="btn btn-primary">Edit</a>

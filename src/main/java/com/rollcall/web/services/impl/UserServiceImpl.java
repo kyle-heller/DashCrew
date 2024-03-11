@@ -59,28 +59,27 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUserProfile(UserProfileDto userProfileDto) {
-        String username = SecurityUtil.getSessionUser(); // Assuming you have a way to retrieve the current user's username
-        UserEntity user = userRepository.findByUsername(username); // Assuming you have a repository for managing UserEntity objects
+        String username = SecurityUtil.getSessionUser();
+        UserEntity user = userRepository.findByUsername(username);
         if (user != null) {
             UserProfile userProfile = user.getProfile();
             if (userProfile == null) {
                 userProfile = new UserProfile();
             }
-            // Update the UserProfile object with data from UserProfileDto
             userProfile.setAboutMe(userProfileDto.getAboutMe());
             userProfile.setInterests(userProfileDto.getInterests());
             userProfile.setPhotoURL(userProfileDto.getPhotoURL());
             userProfile.setDarkMode(userProfileDto.isDarkMode());
             userProfile.setZip(userProfileDto.getZip());
 
-            // Set the updated profile back to the user entity
-            user.setProfile(userProfile);
+            profileRepository.save(userProfile);
 
             // Save the updated user entity
-            userRepository.save(user); // Assuming you have a method in userRepository to save the user entity
+            userRepository.save(user);
         } else {
             // Handle the case where the user is not found
             throw new RuntimeException("User not found");
         }
     }
+
 }

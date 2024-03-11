@@ -1,0 +1,43 @@
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <style>
+        .game-img {
+            width: 100%; /* Makes image responsive */
+            height: 250px; /* Fixed height, adjust as needed */
+            object-fit: cover; /* Ensures image covers the area */
+            border-radius: .3rem; /* Matches Bootstrap's rounded-3 style */
+        }
+    </style>
+
+    <title>
+        Select a group:
+    </title>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <!-- Page Content-->
+    <section layout:fragment="body" class="py-5">
+        <div class="container px-5 my-5">
+            <div class="text-center mb-5">
+                <h1 class="fw-bolder">Select a group:</h1>
+                <p class="lead fw-normal text-muted mb-0">Which group is this event for?</p>
+            </div>
+            <div class="row gx-5">
+                <div class="container">
+                    <div class="row">
+                        <div th:each="group : ${groups}" class="col-lg-3 col-md-4 col-sm-6 mb-2">
+                            <div class="position-relative mb-3">
+                                <a th:text="${#strings.abbreviate(group.title, 20)}" class="h4 fw-bolder text-decoration-none stretched-link" th:href="@{/events/{groupId}/new(groupId=${group.id})}"></a>
+                                <img class="rounded-3 mb-3 game-img" th:src="${group.photoURL}" alt="..." />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

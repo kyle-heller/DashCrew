@@ -29,7 +29,7 @@
                     <div class="row">
                         <div th:each="game : ${games}" class="col-lg-3 col-md-4 col-sm-6 mb-2">
                             <div class="position-relative mb-3">
-                                <a th:text="${#strings.abbreviate(game.title, 20)}" class="h4 fw-bolder text-decoration-none link-dark stretched-link" th:href="@{/games/{gameId}(gameId=${game.id})}"></a>
+                                <a th:text="${#strings.abbreviate(game.title, 20)}" class="h4 fw-bolder text-decoration-none stretched-link" th:href="@{/games/{gameId}(gameId=${game.id})}"></a>
                                 <img class="rounded-3 mb-3 game-img" th:src="${game.photoURL}" alt="..." />
                             </div>
                         </div>

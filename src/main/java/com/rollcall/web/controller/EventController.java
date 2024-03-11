@@ -1,11 +1,14 @@
 package com.rollcall.web.controller;
 
 import com.rollcall.web.dto.EventDto;
+import com.rollcall.web.dto.GroupDto;
 import com.rollcall.web.models.Event;
 import com.rollcall.web.models.UserEntity;
 import com.rollcall.web.security.SecurityUtil;
 import com.rollcall.web.services.EventService;
+import com.rollcall.web.services.GroupService;
 import com.rollcall.web.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,10 +24,12 @@ import java.util.List;
 public class EventController {
     private final EventService eventService;
     private final UserService userService;
+    private final GroupService groupService;
 
-    public EventController(EventService eventService, UserService userService) {
+    public EventController(EventService eventService, UserService userService, GroupService groupService) {
         this.eventService = eventService;
         this.userService = userService;
+        this.groupService = groupService;
     }
 
     @GetMapping("/events")
@@ -42,6 +47,21 @@ public class EventController {
         model.addAttribute("event", new Event());
         return "events-create";
     }
+
+    @GetMapping("/events/new")
+    public String showIntermediateView(Model model) {
+        UserEntity user = new UserEntity();
+        List<GroupDto> groups = groupService.findAllGroups();
+        String username = SecurityUtil.getSessionUser();
+        if(username != null) {
+            user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        }
+        model.addAttribute("user", user);
+        model.addAttribute("groups", groups);
+        return "events-selectgroup";
+    }
+
 
     @PostMapping("/events/{groupId}")
     public String createEvent(@PathVariable("groupId") Long groupId, @ModelAttribute("event") EventDto eventDto) {

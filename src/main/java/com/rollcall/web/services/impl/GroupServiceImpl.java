@@ -16,12 +16,16 @@ import java.util.stream.Collectors;
 
 import static com.rollcall.web.mapper.GroupMapper.mapToGroup;
 import static com.rollcall.web.mapper.GroupMapper.mapToGroupDto;
-@RequiredArgsConstructor
 @Service
 public class GroupServiceImpl implements GroupService {
     private final GroupRepository groupRepository;
     private final UserRepository userRepository;
 
+    @Autowired
+    public GroupServiceImpl(GroupRepository groupRepository, UserRepository userRepository) {
+        this.groupRepository = groupRepository;
+        this.userRepository = userRepository;
+    }
 
     @Override // Retrieves all group entities from the database, converts them to GroupDto objects, and returns them as a list
     public List<GroupDto> findAllGroups() {
