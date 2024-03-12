@@ -1,8 +1,8 @@
 package com.rollcall.web.dto;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
 
 
 @Data

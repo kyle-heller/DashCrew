@@ -26,26 +26,29 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/login", "/register", "/clubs", "/css/**", "/js/**")
-                .permitAll()
-                .and()
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/groups")
-                        .loginProcessingUrl("/login")
-                        .failureUrl("/login?error=true")
-                        .permitAll()
-                ).logout(
-                        logout -> logout
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
-                );
+        @Bean
+        public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+            httpSecurity
+                    .csrf().disable()
+                    .authorizeRequests(authorize -> authorize
+                            .requestMatchers("/login", "/register", "/clubs", "/css/**", "/js/**").permitAll()
+                            .anyRequest().authenticated()
+                    )
+                    .formLogin(form -> form
+                            .loginPage("/login")
+                            .loginProcessingUrl("/login")
+                            .defaultSuccessUrl("/groups", true)
+                            .failureUrl("/login?error=true")
+                            .permitAll()
+                    )
+                    .logout(logout -> logout
+                            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                            .logoutSuccessUrl("/login?logout=true")
+                            .permitAll()
+                    );
 
-        return httpSecurity.build();
-    }
+            return httpSecurity.build();
+        }
 
     public void configure(AuthenticationManagerBuilder builder) throws Exception {
         builder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());

@@ -8,6 +8,7 @@ import com.rollcall.web.security.SecurityUtil;
 import com.rollcall.web.services.GameService;
 import com.rollcall.web.services.UserService;
 import com.rollcall.web.services.external.BggApiServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 

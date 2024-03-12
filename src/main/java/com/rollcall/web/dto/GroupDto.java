@@ -1,10 +1,10 @@
 package com.rollcall.web.dto;
 
 import com.rollcall.web.models.UserEntity;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.List;
 

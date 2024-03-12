@@ -3,14 +3,13 @@ package com.rollcall.web.controller;
 import com.rollcall.web.dto.RegistrationDto;
 import com.rollcall.web.models.UserEntity;
 import com.rollcall.web.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import javax.validation.Valid;
 
 @Controller
 public class AuthController {
