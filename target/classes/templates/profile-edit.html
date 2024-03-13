@@ -2,14 +2,25 @@
       xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 
-<script>
-    function selectAvatar(avatar) {
-        // Set the selected avatar value
-        document.getElementById('selectedAvatar').value = avatar;
-    }
-</script>
-
 <head>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            window.updateSelectedAvatar = function(avatarFilename) {
+                console.log(avatarFilename); // For debugging
+                document.getElementById('selectedAvatar').value = avatarFilename;
+
+                // Optional: Highlight the selected avatar
+                // Remove highlight from all avatars
+                document.querySelectorAll('.avatar-option').forEach(option => {
+                    option.classList.remove('selected-avatar');
+                });
+
+                // Add highlight to the clicked avatar
+                // This assumes avatar filenames are unique and used as part of an element's id or another distinguishable attribute
+                document.querySelector(`[alt='${avatarFilename}']`).parentNode.classList.add('selected-avatar');
+            };
+        });
+    </script>
     <title>Group Update</title>
     <style>
         .avatar-grid {
@@ -63,22 +74,22 @@
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <div><p></p></div>
-
+                        <input type="hidden" id="selectedAvatar" name="photoURL" th:value="${userProfileDto.photoURL}"/>
                         <label>Choose Avatar:</label>
                         <div><p></p></div>
-
                         <div class="avatar-grid">
                             <!-- Loop through avatar files and generate HTML elements for each -->
-                            <div th:each="avatar : ${avatarFiles}" class="avatar-option" onclick="selectAvatar('${avatar}')">
-                                <!-- Use th:src to set the image source dynamically -->
-                                <img th:src="@{'/assets/avatars/' + ${avatar}}" th:alt="${avatar}">
+                            <div th:each="avatar : ${avatarFiles}"
+                                 class="avatar-option"
+                                 onclick="updateSelectedAvatar(this.getAttribute('data-avatar-filename'))"
+                                 th:attr="data-avatar-filename=${avatar}">
+                                <img th:src="@{'/assets/avatars/' + ${avatar}}" th:alt="${avatar}" style="cursor:pointer;">
                             </div>
                         </div>
+
                     </div>
                 </div>
-                <!-- Hidden input field to store selected avatar path -->
-                <input type="hidden" id="selectedAvatar" name="selectedAvatar" th:value="${userProfileDto.selectedAvatar}">
-                <!-- Other form fields... -->
+
             </form>
         </div>
     </section>

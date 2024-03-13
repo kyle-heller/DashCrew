@@ -1,5 +1,6 @@
-package com.rollcall.web.services;
+package com.rollcall.web.services.impl;
 
+import com.rollcall.web.repository.ProfileRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -12,6 +13,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class AvatarService {
+
+    private final ProfileRepository profileRepository;
+
+    public AvatarService(ProfileRepository profileRepository) {
+        this.profileRepository = profileRepository;
+    }
+
     public List<String> getAvatarFiles() {
         List<String> avatarFiles = new ArrayList<>();
         try {
