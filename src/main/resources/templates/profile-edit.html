@@ -69,12 +69,24 @@
                         <input type="text" class="form-control" id="zip" th:field="${userProfileDto.zip}" placeholder="Zipcode">
                     </div>
                 </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="city">City</label>
+                        <input type="text" class="form-control" id="city" th:field="${userProfileDto.city}" placeholder="City">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="state">State</label>
+                        <input type="text" class="form-control" id="state" th:field="${userProfileDto.state}" placeholder="State">
+                    </div>
+                </div>
                 <div><p></p></div>
                 <button type="submit" class="btn btn-primary">Update</button>
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <div><p></p></div>
-                        <input type="hidden" id="selectedAvatar" name="photoURL" th:value="${userProfileDto.photoURL}"/>
+                        <input type="hidden" id="selectedAvatar" name="photoURL" th:value="Blank"/>
                         <label>Choose Avatar:</label>
                         <div><p></p></div>
                         <div class="avatar-grid">

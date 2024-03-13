@@ -12,7 +12,8 @@ public class UserProfileMapper {
                 .interests(userProfileDto.getInterests())
                 .zip(userProfileDto.getZip())
                 .photoURL(userProfileDto.getPhotoURL())
-                .darkMode(userProfileDto.isDarkMode())
+                .city(userProfileDto.getCity())
+                .state(userProfileDto.getState())
                 .build();
     }
 
@@ -23,7 +24,8 @@ public class UserProfileMapper {
                 .interests(userProfile.getInterests())
                 .zip(userProfile.getZip())
                 .photoURL(userProfile.getPhotoURL())
-                .darkMode(userProfile.isDarkMode())
+                .city(userProfile.getCity())
+                .state(userProfile.getState())
                 .build();
     }
 }

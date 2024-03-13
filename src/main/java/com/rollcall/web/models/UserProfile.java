@@ -21,7 +21,8 @@ public class UserProfile {
     @Column(columnDefinition = "TEXT")
     private String interests;
     private String photoURL;
-    private boolean darkMode;
+    private String city;
+    private String state;
     private int zip;
 
     @OneToOne(mappedBy = "profile", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)

@@ -21,7 +21,8 @@ public class UserProfileDto {
     private String interests;
     private String photoURL;
     private String selectedAvatar;
-    private boolean darkMode;
     private int zip;
+    private String city;
+    private String state;
 
 }

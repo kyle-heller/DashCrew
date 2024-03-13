@@ -70,8 +70,9 @@ public class ProfileController {
         userProfileDto.setAboutMe(userProfile.getAboutMe());
         userProfileDto.setInterests(userProfile.getInterests());
         userProfileDto.setPhotoURL(userProfile.getPhotoURL());
-        userProfileDto.setDarkMode(userProfile.isDarkMode());
         userProfileDto.setZip(userProfile.getZip());
+        userProfileDto.setCity(userProfile.getCity());
+        userProfileDto.setState(userProfile.getState());
 
         model.addAttribute("avatarFiles", avatarFiles);
         model.addAttribute("userProfileDto", userProfileDto);
@@ -90,19 +91,17 @@ public class ProfileController {
             return "error";
         }
 
-        String photoURL = "http://localhost/assets/avatars/";
-        photoURL += updatedProfileDto.getPhotoURL();
+        if (!updatedProfileDto.getPhotoURL().equals("Blank")) {
+            String photoURL = "http://localhost/assets/avatars/";
+            updatedProfileDto.setPhotoURL(photoURL + updatedProfileDto.getPhotoURL());
+        }
+        else {
+            updatedProfileDto.setPhotoURL(userProfile.getPhotoURL());
+            System.out.println("I'm here!");
+            System.out.println(userProfile.getPhotoURL());
+        }
 
-        userProfile.setAboutMe(updatedProfileDto.getAboutMe());
-        userProfile.setInterests(updatedProfileDto.getInterests());
-        userProfile.setPhotoURL(photoURL);
-        userProfile.setDarkMode(updatedProfileDto.isDarkMode());
-        userProfile.setZip(updatedProfileDto.getZip());
-
-        System.out.println(userProfile.getAboutMe());
-        System.out.println(userProfile.getPhotoURL());
-
-        userService.updateUserProfile(UserProfileMapper.mapToUserProfileDto(userProfile));
+        userService.updateUserProfile(updatedProfileDto);
 
         return "redirect:/user/" + SecurityUtil.getSessionUser() + "/profile";
     }

@@ -69,8 +69,9 @@ public class UserServiceImpl implements UserService {
             userProfile.setAboutMe(userProfileDto.getAboutMe());
             userProfile.setInterests(userProfileDto.getInterests());
             userProfile.setPhotoURL(userProfileDto.getPhotoURL());
-            userProfile.setDarkMode(userProfileDto.isDarkMode());
             userProfile.setZip(userProfileDto.getZip());
+            userProfile.setCity(userProfileDto.getCity());
+            userProfile.setState(userProfileDto.getState());
 
             profileRepository.save(userProfile);
 
