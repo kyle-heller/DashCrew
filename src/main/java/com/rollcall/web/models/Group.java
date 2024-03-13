@@ -39,4 +39,9 @@ public class Group {
     @OneToMany(mappedBy = "group", cascade = CascadeType.REMOVE)
     private List<Event> events = new ArrayList<>();
 
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<UserComment> comments = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "groups")
+    private List<UserEntity> users = new ArrayList<>();
 }

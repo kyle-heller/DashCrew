@@ -9,6 +9,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -38,4 +41,10 @@ public class Event {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "game_id", referencedColumnName = "id")
     private Game game;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<UserComment> comments = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "events")
+    private Set<UserEntity> users;
 }
