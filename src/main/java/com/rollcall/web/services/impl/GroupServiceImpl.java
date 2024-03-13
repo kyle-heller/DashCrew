@@ -53,7 +53,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override // Finds a single group by its ID, converts it to GroupDto, and returns it. Throws an exception if the group is not found
-    public GroupDto findClubById(long groupId) {
+    public GroupDto findGroupById(long groupId) {
         Group group = groupRepository.findById(groupId).get();
         return mapToGroupDto(group);
     }

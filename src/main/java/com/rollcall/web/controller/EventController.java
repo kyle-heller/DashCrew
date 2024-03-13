@@ -3,13 +3,14 @@ package com.rollcall.web.controller;
 import com.rollcall.web.dto.EventDto;
 import com.rollcall.web.dto.GameDto;
 import com.rollcall.web.dto.GroupDto;
+import com.rollcall.web.dto.UserProfileDto;
+import com.rollcall.web.mapper.UserProfileMapper;
 import com.rollcall.web.models.Event;
+import com.rollcall.web.models.UserCommentDto;
 import com.rollcall.web.models.UserEntity;
+import com.rollcall.web.models.UserProfile;
 import com.rollcall.web.security.SecurityUtil;
-import com.rollcall.web.services.EventService;
-import com.rollcall.web.services.GameService;
-import com.rollcall.web.services.GroupService;
-import com.rollcall.web.services.UserService;
+import com.rollcall.web.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +21,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class EventController {
@@ -29,11 +32,15 @@ public class EventController {
     private final GroupService groupService;
     private final GameService gameService;
 
-    public EventController(EventService eventService, UserService userService, GroupService groupService, GameService gameService) {
+    private final CommentService commentService;
+
+
+    public EventController(EventService eventService, UserService userService, GroupService groupService, GameService gameService, CommentService commentService) {
         this.eventService = eventService;
         this.userService = userService;
         this.groupService = groupService;
         this.gameService = gameService;
+        this.commentService = commentService;
     }
 
     @GetMapping("/events")
@@ -78,12 +85,31 @@ public class EventController {
     @GetMapping("/events/{eventId}")
     public String viewEvent(@PathVariable("eventId") Long eventId, Model model) {
         EventDto eventDto = eventService.findByEventId(eventId);
-        UserEntity user = getUser();
+        List<UserCommentDto> comments = commentService.findEventCommentById(eventId);
+
+        Map<Long, UserProfileDto> userAvatars = new HashMap<>();
+
+        for (UserCommentDto comment : comments) {
+            UserEntity userEntity = comment.getUser();
+            if (userEntity != null && userEntity.getProfile() != null) {
+                Long userId = userEntity.getId();
+                UserProfileDto userProfile = UserProfileMapper.mapToUserProfileDto(userEntity.getProfile());
+                userAvatars.put(userId, userProfile);
+            }
+        }
+        System.out.println(userAvatars);
+        UserEntity currentUser = getUser();
+
         model.addAttribute("group", eventDto.getGroup());
         model.addAttribute("event", eventDto);
-        model.addAttribute("user", user);
+        model.addAttribute("user", currentUser);
+        model.addAttribute("comments", comments);
+        model.addAttribute("userAvatars", userAvatars);
+
         return "events-detail";
     }
+
+
 
     @GetMapping("/events/{eventId}/edit")
     public String editEventForm(@PathVariable("eventId") Long eventId, Model model) {

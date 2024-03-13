@@ -30,7 +30,7 @@ public class ProfileController {
         this.userService = userService;
     }
 
-    @GetMapping("/user/{username}/profile")
+    @GetMapping("/users/{username}")
     public String showProfile(@PathVariable("username") String username, Model model) {
         UserEntity user = userService.findByUsername(username);
         if (user == null) {
@@ -47,7 +47,7 @@ public class ProfileController {
         return "profile-details";
     }
 
-    @GetMapping("/user/profile")
+    @GetMapping("/users/profile")
     public String showMyProfile(Model model) {
         String currentUser = SecurityUtil.getSessionUser();
         if(currentUser != null) {
@@ -103,7 +103,7 @@ public class ProfileController {
 
         userService.updateUserProfile(updatedProfileDto);
 
-        return "redirect:/user/" + SecurityUtil.getSessionUser() + "/profile";
+        return "redirect:/users/" + SecurityUtil.getSessionUser();
     }
 
 

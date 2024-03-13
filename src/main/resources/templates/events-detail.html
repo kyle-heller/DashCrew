@@ -34,24 +34,41 @@
 
                     </div>
                     </div>
-                </div>
-                <!-- Side widgets-->
-                <div class="col-lg-4">
-                    <!-- Search widget-->
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h1 class="fw-bolder" th:text=${event.game.title}></h1>
-                            <p th:utext=${event.game.description}></p>
-                        </div>
+                <div th:each="comment : ${comments}" style="display: flex; align-items: center; margin-bottom: 20px;">
+                    <div style="margin-right: 15px; text-align: center;">
+                        <!-- Link for username -->
+                        <a th:href="@{'http://localhost/users/' + ${comment.user.username}}">
+                            <!-- Display username -->
+                            <p th:text="${comment.user.username}" style="margin: 0; font-weight: bold;">Username</p>
+                        </a>
+                        <!-- Link for user avatar -->
+                        <a th:href="@{'http://localhost/users/' + ${comment.user.username}}">
+                            <!-- Display user avatar -->
+                            <img th:src="${userAvatars[comment.user.id].photoURL}" alt="User avatar" style="width: 50px; height: 50px; border-radius: 50%;"/>
+                        </a>
                     </div>
-                    <!-- Categories widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">Game Details</div>
-                        <div class="card-body">
-                            <p class="card-text" th:text="'Playing Time: ' + ${event.game.playingTime}"></p>
-                            <p class="card-text" th:text="'Min Players: ' + ${event.game.minPlayers}"></p>
-                            <p class="card-text" th:text="'Max Players: ' + ${event.game.maxPlayers}"></p>
-                        </div>
+                    <!-- Display comment content -->
+                    <p th:text="${comment.content}" style="margin: 0; flex-grow: 1;">Comment content</p>
+                </div>
+
+            </div>
+            <!-- Side widgets-->
+            <div class="col-lg-4">
+                <!-- Search widget-->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <img class="fw-bolder" style="width: 100px" th:src=${event.game.photoURL}></img>
+                        <h1 class="fw-bolder" th:text=${event.game.title}></h1>
+                        <p th:utext=${event.game.description}></p>
+                    </div>
+                </div>
+                <!-- Categories widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Game Details</div>
+                    <div class="card-body">
+                        <p class="card-text" th:text="'Playing Time: ' + ${event.game.playingTime}"></p>
+                        <p class="card-text" th:text="'Min Players: ' + ${event.game.minPlayers}"></p>
+                        <p class="card-text" th:text="'Max Players: ' + ${event.game.maxPlayers}"></p>
                     </div>
                 </div>
             </div>

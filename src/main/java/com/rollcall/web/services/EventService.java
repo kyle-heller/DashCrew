@@ -1,6 +1,6 @@
 package com.rollcall.web.services;
 import com.rollcall.web.dto.EventDto;
-import org.springframework.stereotype.Service;
+import com.rollcall.web.models.Event;
 
 import java.util.List;
 

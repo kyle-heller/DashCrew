@@ -1,21 +1,19 @@
 package com.rollcall.web.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "comments")
 
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 
+@Entity(name = "comments")
 public class UserComment {
 
     @Id
@@ -23,9 +21,6 @@ public class UserComment {
     private Long id;
     private String content;
 
-
-
-//    User to Comment: One-to-Many.
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "group_id", referencedColumnName = "id")

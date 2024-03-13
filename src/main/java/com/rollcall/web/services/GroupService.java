@@ -2,7 +2,6 @@ package com.rollcall.web.services;
 
 import com.rollcall.web.dto.GroupDto;
 import com.rollcall.web.models.Group;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 public interface GroupService {
@@ -12,7 +11,7 @@ public interface GroupService {
 
     
 
-    GroupDto findClubById(long groupId);
+    GroupDto findGroupById(long groupId);
 
     void updateGroup(GroupDto group);
 

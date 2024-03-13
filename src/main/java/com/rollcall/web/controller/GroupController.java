@@ -1,9 +1,14 @@
 package com.rollcall.web.controller;
 
+import com.rollcall.web.dto.EventDto;
 import com.rollcall.web.dto.GroupDto;
+import com.rollcall.web.dto.UserProfileDto;
+import com.rollcall.web.mapper.UserProfileMapper;
 import com.rollcall.web.models.Group;
+import com.rollcall.web.models.UserCommentDto;
 import com.rollcall.web.models.UserEntity;
 import com.rollcall.web.security.SecurityUtil;
+import com.rollcall.web.services.CommentService;
 import com.rollcall.web.services.GroupService;
 import com.rollcall.web.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +17,21 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class GroupController {
     private GroupService groupService;
     private UserService userService;
+    private CommentService commentService;
 
     @Autowired
-    public GroupController(GroupService groupService, UserService userService) {
+    public GroupController(GroupService groupService, UserService userService, CommentService commentService) {
         this.userService = userService;
         this.groupService = groupService;
+        this.commentService = commentService;
     }
 
     @GetMapping("/groups")
@@ -57,13 +66,25 @@ public class GroupController {
 
     @GetMapping("/groups/{groupId}")
     public String groupDetail(@PathVariable("groupId") Long groupId, Model model) {
+        GroupDto groupDto = groupService.findGroupById(groupId);
+        List<UserCommentDto> comments = commentService.findGroupCommentById(groupId);
+        Map<Long, UserProfileDto> userAvatars = new HashMap<>();
         UserEntity user = new UserEntity();
-        GroupDto groupDto = groupService.findClubById(groupId);
         String username = SecurityUtil.getSessionUser();
         if(username != null) {
             user = userService.findByUsername(username);
             model.addAttribute("user", user);
         }
+        for (UserCommentDto comment : comments) {
+            UserEntity userEntity = comment.getUser();
+            if (userEntity != null && userEntity.getProfile() != null) {
+                Long userId = userEntity.getId();
+                UserProfileDto userProfile = UserProfileMapper.mapToUserProfileDto(userEntity.getProfile());
+                userAvatars.put(userId, userProfile);
+            }
+        }
+        model.addAttribute("comments", comments);
+        model.addAttribute("userAvatars", userAvatars);
         model.addAttribute("user", user);
         model.addAttribute("group", groupDto);
         return "groups-detail";
@@ -71,7 +92,7 @@ public class GroupController {
 
     @GetMapping("/groups/{groupId}/edit")
     public String editGroupForm(@PathVariable("groupId") long groupId, Model model) {
-        GroupDto group = groupService.findClubById(groupId);
+        GroupDto group = groupService.findGroupById(groupId);
         model.addAttribute("group", group);
         return "groups-edit";
     }

@@ -7,7 +7,6 @@ import com.rollcall.web.repository.EventRepository;
 import com.rollcall.web.repository.GroupRepository;
 import com.rollcall.web.services.EventService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
