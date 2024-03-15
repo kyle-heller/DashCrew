@@ -15,12 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,11 +81,12 @@ public class EventController {
         return "redirect:/groups/" + groupId +"?success";
     }
 
+
     @GetMapping("/events/{eventId}")
-    public String viewEvent(@PathVariable("eventId") Long eventId, Model model) {
+    public String viewEvent(@PathVariable("eventId") Long eventId, Model model, Principal principal) {
         EventDto eventDto = eventService.findByEventId(eventId);
         List<UserCommentDto> comments = commentService.findEventCommentById(eventId);
-
+        boolean isUserJoined = userService.isUserJoinedEvent(principal.getName(), eventId);
         Map<Long, UserProfileDto> userAvatars = new HashMap<>();
 
         for (UserCommentDto comment : comments) {
@@ -105,6 +105,10 @@ public class EventController {
         model.addAttribute("user", currentUser);
         model.addAttribute("comments", comments);
         model.addAttribute("userAvatars", userAvatars);
+        model.addAttribute("resourceType", "events");
+        model.addAttribute("resourceId", eventId);
+        model.addAttribute("isUserJoined", isUserJoined);
+
 
         return "events-detail";
     }
@@ -133,6 +137,19 @@ public class EventController {
         eventService.deleteEvent(eventId);
         return "redirect:/events";
     }
+
+    @PostMapping("/events/join")
+    public String joinEvent(@RequestParam("eventId") Long eventId, Principal principal, RedirectAttributes redirectAttributes) {
+        // Principal is used here to get the current logged-in user's information.
+        // Your logic to determine whether to join or unjoin the event goes here.
+        // For demonstration, let's assume a service method does this:
+        UserEntity user = userService.findByUsername(principal.getName());
+        eventService.toggleUserParticipationInEvent(user.getId(), eventId);
+        // Redirect to avoid double submission and provide feedback to the user.
+        redirectAttributes.addFlashAttribute("message", "Successfully updated your participation status.");
+        return "redirect:/events/" + eventId;
+    }
+
 
     private UserEntity getUser() {
         String username = SecurityUtil.getSessionUser();

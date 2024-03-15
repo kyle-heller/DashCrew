@@ -16,7 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,9 +68,10 @@ public class GroupController {
     }
 
     @GetMapping("/groups/{groupId}")
-    public String groupDetail(@PathVariable("groupId") Long groupId, Model model) {
+    public String groupDetail(@PathVariable("groupId") Long groupId, Model model, Principal principal) {
         GroupDto groupDto = groupService.findGroupById(groupId);
         List<UserCommentDto> comments = commentService.findGroupCommentById(groupId);
+        boolean isUserJoined = userService.isUserJoinedGroup(principal.getName(), groupId);
         Map<Long, UserProfileDto> userAvatars = new HashMap<>();
         UserEntity user = new UserEntity();
         String username = SecurityUtil.getSessionUser();
@@ -87,7 +91,19 @@ public class GroupController {
         model.addAttribute("userAvatars", userAvatars);
         model.addAttribute("user", user);
         model.addAttribute("group", groupDto);
+        model.addAttribute("resourceType", "groups");
+        model.addAttribute("resourceId", groupId);
+        model.addAttribute("isUserJoined", isUserJoined);
         return "groups-detail";
+    }
+
+
+    @PostMapping("/groups/join")
+    public String joinGroup(@RequestParam("groupId") Long groupId, Principal principal, RedirectAttributes redirectAttributes) {
+        UserEntity user = userService.findByUsername(principal.getName());
+        groupService.toggleUserParticipationInGroup(user.getId(), groupId);
+        redirectAttributes.addFlashAttribute("message", "Successfully updated your participation status.");
+        return "redirect:/groups/" + groupId;
     }
 
     @GetMapping("/groups/{groupId}/edit")
@@ -130,5 +146,10 @@ public class GroupController {
 
         model.addAttribute("groups", groups);
         return "groups-list";
+    }
+
+    private UserEntity getUser() {
+        String username = SecurityUtil.getSessionUser();
+        return username != null ? userService.findByUsername(username) : new UserEntity();
     }
 }

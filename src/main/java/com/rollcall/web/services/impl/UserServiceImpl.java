@@ -12,9 +12,11 @@ import com.rollcall.web.security.SecurityUtil;
 import com.rollcall.web.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.Arrays;
 @Service
 @RequiredArgsConstructor
@@ -81,6 +83,28 @@ public class UserServiceImpl implements UserService {
             // Handle the case where the user is not found
             throw new RuntimeException("User not found");
         }
+    }
+
+    @Override
+    public boolean isUserJoinedEvent(String username, Long eventId) {
+        UserEntity user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        return user.getEvents().stream()
+                .anyMatch(event -> event.getId().equals(eventId));
+    }
+
+    @Override
+    public boolean isUserJoinedGroup(String username, Long groupId) {
+        UserEntity user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        return user.getGroups().stream()
+                .anyMatch(group -> group.getId().equals(groupId));
     }
 
 }

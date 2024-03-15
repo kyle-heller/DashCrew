@@ -76,7 +76,16 @@
                             </div>
                         </div>
                     </div>
+
+                    <form th:action="@{/groups/join}" method="post">
+                        <input type="hidden" name="groupId" th:value="${group.id}" />
+                        <button type="submit" th:class="${isUserJoined ? 'btn btn-secondary' : 'btn btn-primary'}">
+                            <span th:text="${isUserJoined ? 'Joined' : 'Join Group'}">Join Group</span>
+                        </button>
+                    </form>
+
                     <div class="card mb-4">
+                        <div class="card-header">Comments</div>
                         <div th:each="comment : ${comments}" style="display: flex; align-items: center; margin-bottom: 20px;">
                             <div style="margin-right: 15px; text-align: center;">
                                 <!-- Link for username -->
@@ -87,11 +96,20 @@
                                 <!-- Link for user avatar -->
                                 <a th:href="@{'http://localhost/users/' + ${comment.user.username}}">
                                     <!-- Display user avatar -->
-                                    <img th:src="${userAvatars[comment.user.id].photoURL}" alt="User avatar" style="width: 50px; height: 50px; border-radius: 50%;"/>
+                                    <img th:src="${userAvatars[comment.user.id].photoURL}" alt="User avatar" style="width: 50px; height: 50px; margin-left: 10px;"/>
                                 </a>
                             </div>
                             <!-- Display comment content -->
                             <p th:text="${comment.content}" style="margin: 0; flex-grow: 1;">Comment content</p>
+                        </div>
+                        <div class="container">
+                            <form th:action="@{'/' + ${resourceType} + '/' + ${resourceId} + '/newcomment'}" method="post">
+                                <div class="form-group">
+                                    <label for="content">Comment</label>
+                                    <input type="text" class="form-control" id="content" name="content" placeholder="Enter your comment here" required="required" />
+                                </div>
+                                <button type="submit" class="btn btn-primary">Post Comment</button>
+                            </form>
                         </div>
 
                     </div>

@@ -3,8 +3,10 @@ package com.rollcall.web.services.impl;
 import com.rollcall.web.dto.EventDto;
 import com.rollcall.web.models.Event;
 import com.rollcall.web.models.Group;
+import com.rollcall.web.models.UserEntity;
 import com.rollcall.web.repository.EventRepository;
 import com.rollcall.web.repository.GroupRepository;
+import com.rollcall.web.repository.UserRepository;
 import com.rollcall.web.services.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,8 @@ public class EventServiceImpl implements EventService {
 
     private final EventRepository eventRepository;
     private final GroupRepository groupRepository;
+    private final UserRepository userRepository;
+
 
     @Override // Creates a new event and associates it with the group specified by groupId, then saves it to the database
     public void createEvent(Long groupId, EventDto eventDto) {
@@ -50,6 +54,24 @@ public class EventServiceImpl implements EventService {
     @Override // Deletes an event identified by eventId from the database
     public void deleteEvent(long eventId) {
         eventRepository.deleteById(eventId);
+    }
+
+    public void toggleUserParticipationInEvent(Long userId, Long eventId) {
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new RuntimeException("Event not found"));
+        // Check if the user is already participating in the event
+        boolean isParticipating = user.getEvents().contains(event);
+
+        if (isParticipating) {
+            // If the user is already participating, remove them from the event
+            user.getEvents().remove(event);
+        } else {
+            // If the user is not already participating, add them to the event
+            user.getEvents().add(event);
+        }
+        userRepository.save(user); // Save the user entity back to the database
     }
 
 }

@@ -15,4 +15,8 @@ public interface UserService {
     UserEntity findByUsername(String username);
 
     void updateUserProfile(UserProfileDto userProfileDto);
+
+    boolean isUserJoinedEvent(String username, Long eventId);
+
+    boolean isUserJoinedGroup(String username, Long groupId);
 }

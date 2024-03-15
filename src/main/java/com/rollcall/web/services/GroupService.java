@@ -9,7 +9,6 @@ public interface GroupService {
 
     Group saveGroup(GroupDto groupDto);
 
-    
 
     GroupDto findGroupById(long groupId);
 
@@ -18,4 +17,5 @@ public interface GroupService {
     void deleteGroup(Long groupId);
 
     List<GroupDto> searchGroups(String query);
+    void toggleUserParticipationInGroup(Long userId, Long groupId);
 }

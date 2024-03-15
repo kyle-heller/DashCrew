@@ -2,16 +2,16 @@ package com.rollcall.web.services.impl;
 
 import com.rollcall.web.dto.GameDto;
 import com.rollcall.web.mapper.GameMapper;
+import com.rollcall.web.models.Event;
 import com.rollcall.web.models.Game;
 import com.rollcall.web.models.Group;
 import com.rollcall.web.models.UserEntity;
-import com.rollcall.web.repository.CategoryRepository;
-import com.rollcall.web.repository.GameRepository;
-import com.rollcall.web.repository.UserRepository;
+import com.rollcall.web.repository.*;
 import com.rollcall.web.security.SecurityUtil;
 import com.rollcall.web.services.BggApiService;
 import com.rollcall.web.services.GameService;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,6 +30,7 @@ public class GameServiceImpl implements GameService {
 
     private final GameRepository gameRepository;
     private final UserRepository userRepository;
+
 
     @Override //fetches a page of Game entities from the database
     public Page<Game> findPaginated(Pageable pageable) {
@@ -50,6 +51,7 @@ public class GameServiceImpl implements GameService {
         gameRepository.save(game);
         return null;
     }
+
 
     @Override // Retrieves a Game entity by its ID and converts it to a GameDto, throws if not found
     public GameDto findByGameId(Long gameId) {

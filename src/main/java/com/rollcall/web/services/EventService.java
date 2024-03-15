@@ -14,4 +14,6 @@ public interface EventService {
     void updateEvent(EventDto event);
 
     void deleteEvent(long eventId);
+
+    void toggleUserParticipationInEvent(Long userId, Long eventId);
 }

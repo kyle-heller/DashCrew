@@ -1,5 +1,6 @@
 package com.rollcall.web.services.impl;
 
+import com.rollcall.web.models.Event;
 import com.rollcall.web.models.Group;
 import com.rollcall.web.dto.GroupDto;
 import com.rollcall.web.models.UserEntity;
@@ -68,6 +69,23 @@ public class GroupServiceImpl implements GroupService {
     public List<GroupDto> searchGroups(String query) {
         List<Group> groups = groupRepository.searchGroups(query);
         return groups.stream().map(group -> mapToGroupDto(group)).collect(Collectors.toList());
+    }
+    public void toggleUserParticipationInGroup(Long userId, Long groupId) {
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        Group group = groupRepository.findById(groupId)
+                .orElseThrow(() -> new RuntimeException("Group not found"));
+        // Check if the user is already participating in the event
+        boolean isParticipating = user.getGroups().contains(group);
+
+        if (isParticipating) {
+            // If the user is already participating, remove them from the event
+            user.getGroups().remove(group);
+        } else {
+            // If the user is not already participating, add them to the event
+            user.getGroups().add(group);
+        }
+        userRepository.save(user); // Save the user entity back to the database
     }
 
 }
