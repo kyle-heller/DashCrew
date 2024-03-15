@@ -23,6 +23,40 @@
                            placeholder="Title">
                     <p th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}"></p>
                 </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="city">City</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="city"
+                                th:field="*{city}"
+                                placeholder="City">
+                        <p th:if="${#fields.hasErrors('city')}" class="text-danger" th:errors="*{city}"></p>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="state">State</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="state"
+                                th:field="*{state}"
+                                placeholder="State">
+                        <p th:if="${#fields.hasErrors('state')}" class="text-danger" th:errors="*{state}"></p>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="zip">Zipcode</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="zip"
+                                    th:field="*{zip}"
+                                    placeholder="Zipcode">
+                            <p th:if="${#fields.hasErrors('zip')}" class="text-danger" th:errors="*{zip}"></p>
+                        </div>
+                        <div class="form-row">
+
                 <div class="form-group col-md-6">
                     <label for="photoURL">PhotoURL</label>
                     <input

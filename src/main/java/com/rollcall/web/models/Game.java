@@ -2,6 +2,7 @@
 package com.rollcall.web.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -48,6 +49,7 @@ public class Game {
     private UserEntity createdBy;
 
     @ManyToMany
+    @JsonBackReference
     @JoinTable(
             name = "game_category",
             joinColumns = @JoinColumn(name = "game_id"),

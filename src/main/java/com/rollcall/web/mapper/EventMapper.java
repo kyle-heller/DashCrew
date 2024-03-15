@@ -18,6 +18,10 @@ public class EventMapper {
                 .updatedOn(eventDto.getUpdatedOn())
                 .group(eventDto.getGroup())
                 .game(eventDto.getGame())
+                .zip(eventDto.getZip())
+                .state(eventDto.getState())
+                .city(eventDto.getCity())
+                .content(eventDto.getContent())
                 .build();
     }
 
@@ -34,6 +38,10 @@ public class EventMapper {
                 .updatedOn(event.getUpdatedOn())
                 .group(event.getGroup())
                 .game(event.getGame())
+                .zip(event.getZip())
+                .state(event.getState())
+                .city(event.getCity())
+                .content(event.getContent())
                 .build();
     }
 

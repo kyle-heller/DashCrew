@@ -19,6 +19,9 @@ public class EventDto {
 
     private Long id;
     private String name;
+    private String content;
+    private String city;
+    private String state;
     private int zip;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime startTime;

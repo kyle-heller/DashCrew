@@ -1,6 +1,8 @@
 package com.rollcall.web.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +19,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 @Entity
 @Table(name = "groups")
 public class Group {
@@ -27,6 +28,9 @@ public class Group {
     private String title;
     private String photoURL;
     private String content;
+    private String city;
+    private String state;
+    private Integer zip;
     @CreationTimestamp
     private LocalDateTime createdOn;
     @UpdateTimestamp
@@ -36,9 +40,11 @@ public class Group {
     @JoinColumn(name = "created_by", nullable = false)
     private UserEntity createdBy;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "group", cascade = CascadeType.REMOVE)
     private List<Event> events = new ArrayList<>();
 
+    @JsonBackReference
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<UserComment> comments = new ArrayList<>();
 

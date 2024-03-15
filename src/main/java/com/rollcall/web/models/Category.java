@@ -2,6 +2,7 @@
 package com.rollcall.web.models;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class Category {
 
     private String name;
 
+    @JsonManagedReference
     @ManyToMany(mappedBy = "categories")
     private Set<Game> games = new HashSet<>();
 

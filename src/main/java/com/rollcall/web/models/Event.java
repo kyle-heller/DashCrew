@@ -1,5 +1,6 @@
 package com.rollcall.web.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +24,9 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    private String content;
+    private String city;
+    private String state;
     private Integer zip;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
@@ -33,6 +37,7 @@ public class Event {
     @UpdateTimestamp
     private LocalDateTime updatedOn;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="group_id", nullable = false)
     private Group group;

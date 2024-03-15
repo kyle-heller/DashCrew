@@ -1,6 +1,7 @@
 package com.rollcall.web.services.impl;
 
 import com.rollcall.web.dto.EventDto;
+import com.rollcall.web.mapper.EventMapper;
 import com.rollcall.web.models.Event;
 import com.rollcall.web.models.Group;
 import com.rollcall.web.models.UserEntity;
@@ -45,6 +46,7 @@ public class EventServiceImpl implements EventService {
         return mapToEventDto(event);
     }
 
+
     @Override // Updates an existing event entity with the values from the provided EventDto and saves the changes to the database
     public void updateEvent(EventDto eventDto) {
         Event event = mapToEvent(eventDto);
@@ -72,6 +74,12 @@ public class EventServiceImpl implements EventService {
             user.getEvents().add(event);
         }
         userRepository.save(user); // Save the user entity back to the database
+    }
+
+    @Override
+    public List<EventDto> findEventsByZipCode(List<Integer> zips) {
+        List<Event> events = eventRepository.findByZipCodeIn(zips);
+        return events.stream().map(EventMapper::mapToEventDto).collect(Collectors.toList());
     }
 
 }

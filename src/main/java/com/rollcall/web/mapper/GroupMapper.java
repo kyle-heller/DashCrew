@@ -17,6 +17,9 @@ public class GroupMapper {
                 .createdBy(group.getCreatedBy())
                 .createdOn(group.getCreatedOn())
                 .updatedOn(group.getUpdatedOn())
+                .zip(group.getZip())
+                .state(group.getState())
+                .city(group.getCity())
                 .build();
         return groupDto;
     }
@@ -31,6 +34,9 @@ public class GroupMapper {
                 .createdOn(group.getCreatedOn())
                 .updatedOn(group.getUpdatedOn())
                 .events(group.getEvents().stream().map((event) -> mapToEventDto(event)).collect(Collectors.toList()))
+                .zip(group.getZip())
+                .state(group.getState())
+                .city(group.getCity())
                 .build();
         return groupDto;
     }

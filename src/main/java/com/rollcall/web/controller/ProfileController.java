@@ -52,7 +52,7 @@ public class ProfileController {
         String currentUser = SecurityUtil.getSessionUser();
         if(currentUser != null) {
             model.addAttribute("user", currentUser);
-            return "redirect:/user/" + currentUser + "/profile";
+            return "redirect:/users/" + currentUser;
         }
         return "index";
     }
@@ -97,7 +97,6 @@ public class ProfileController {
         }
         else {
             updatedProfileDto.setPhotoURL(userProfile.getPhotoURL());
-            System.out.println("I'm here!");
             System.out.println(userProfile.getPhotoURL());
         }
 
@@ -115,7 +114,6 @@ public class ProfileController {
 
     private UserProfile getProfile() {
         String username = SecurityUtil.getSessionUser();
-        if (username == null) System.out.println("I'm here");
         UserEntity currentUser = username != null ? userService.findByUsername(username) : null;
         return currentUser != null ? currentUser.getProfile() : null;
     }

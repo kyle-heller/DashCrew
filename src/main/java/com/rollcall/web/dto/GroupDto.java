@@ -23,5 +23,8 @@ public class GroupDto {
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
     private List<EventDto> events;
+    private String city;
+    private String state;
+    private int zip;
 
 }

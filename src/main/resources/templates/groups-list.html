@@ -1,12 +1,69 @@
  <html xmlns:th="http://thymeleaf.org"
        xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
        layout:decorate="~{layout}">
+
  <head>
      <title>
          Group List
      </title>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script>
+
+         function userIsCreator(group) {
+             // Retrieve the current user's ID from a data attribute on the <body> tag
+             var currentUserId = $('body').data('user-id');
+             // Compare the current user's ID to the group creator's ID
+             return currentUserId === group.createdBy.id;
+         }
+
+
+         $(document).ready(function() {
+             console.log("Page ready"); // Debugging: Confirm script runs
+             $('#sortClosestBtn').click(function() {
+                 console.log("Button clicked"); // Debugging: Confirm button click
+                 var filterType = $(this).data('filter-type');
+                 console.log("Filter type:", filterType); // Debugging: Log filter type
+                 sortClosest(filterType);
+             });
+         });
+
+         function sortClosest(filterType) {
+
+             console.log("Making AJAX call for:", filterType); // Debugging
+             $.ajax({
+                 url: '/get/zips',
+                 type: 'GET',
+                 data: { filterType: filterType },
+                 success: function(response) {
+                     var content = '';
+                     $.each(response, function(index, group) {
+                         content += '<div class="col-lg-3 col-md-4 col-sm-6 mb-2">' +
+                             '<div class="position-relative mb-3">' +
+                             '<a href="/groups/' + group.id + '">' +
+                             '<img class="img-fluid rounded-3 mb-3" src="' + group.photoURL + '" alt="..."/>' +
+                             '</a>' +
+                             '<a class="h3 fw-bolder text-decoration-none" href="/groups/' + group.id + '">' + group.title + '</a>' +
+                             '</div>' +
+                             '<a class="btn btn-primary" href="/groups/' + group.id + '">View</a>';
+
+                         if (userIsCreator(group)) {
+                             content += '<a class="btn btn-primary" href="/groups/' + group.id + '/edit">Edit</a>';
+                         }
+
+                         content += '</div>';
+                     });
+
+                     $('#groupList').html(content);
+                 },
+                 error: function(xhr, status, error) {
+                     console.error("An error occurred:", status, error);
+                 }
+             });
+         }
+     </script>
  </head>
 <body class="d-flex flex-column h-100 dark-theme">
+<body class="d-flex flex-column h-100 dark-theme" data-user-id="${user.id}">
 <main class="flex-shrink-0">
     <!-- Page Content-->
     <section layout:fragment="body" class="py-5">
@@ -25,8 +82,9 @@
                 <form th:action="@{/groups/search}" class="form-check-inline my-2 my-lg-0 mb-3">
                     <input name="query" class="form-control mr-sm-2 mb-5" type="search" placeholder="Search gaming groups" aria-label="Search">
                 </form>
+                <button id="sortClosestBtn" class="btn btn-primary" data-filter-type="groups">Sort by Closest</button>
             </div>
-            <div class="row gx-5">
+            <div id="groupList" class="row gx-5">
                 <div th:each="group :${groups}" class="col-lg-3 col-md-4 col-sm-6 mb-2">
                     <div class="position-relative mb-3">
                         <a th:href="@{/groups/{groupId}(groupId=${group.id})}">

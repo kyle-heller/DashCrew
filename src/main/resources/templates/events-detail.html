@@ -25,7 +25,9 @@
                 <div class="card mb-4">
                     <a href="#!"><img class="card-img-top" th:src="${event.photoURL}" alt="..." /></a>
                     <div class="card-body">
-                        <div class="small text-muted" th:text="'Created: ' + ${event.createdOn}"></div>
+                        <strong class="small text-muted" th:text="${event.createdOn} + ' - '">></strong>
+                        <strong class="small text-muted" th:text="${event.city} + ', ' "></strong>
+                        <strong class="small text-muted" th:text="${event.state}"></strong>
                         <p class="card-text" th:text="${event.type}"></p>
                         <div th:if="${user.id} == ${event.group.createdBy.id}">
                             <a class="btn btn-primary" th:href="@{/events/{eventId}/delete(eventId=${event.id})}">Delete</a>

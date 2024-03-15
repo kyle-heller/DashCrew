@@ -30,8 +30,10 @@
                     <div class="card mb-4">
                         <a href="#!"><img class="card-img-top" th:src="${group.photoURL}" alt="..." /></a>
                         <div class="card-body">
-                            <div class="small text-muted" th:text="${group.createdOn}"> </div>
-                            <h2 class="card-title">About this game</h2>
+                            <strong class="small text-muted" th:text="${group.createdOn} + ' - '">></strong>
+                            <strong class="small text-muted" th:text="${group.city} + ', ' "></strong>
+                            <strong class="small text-muted" th:text="${group.state}"></strong>
+                            <h2 class="card-title">About this group</h2>
                             <p class="card-text" th:text="${group.content}"></p>
                             <a class="btn btn-primary" href="#!">Read more →</a>
                             <div th:if="${user.id} == ${group.createdBy.id}">
@@ -50,7 +52,7 @@
                                 <div class="card-body">
                                     <div class="small text-muted">January 1, 2023</div>
                                     <h2 th:text="${event.name}" class="card-title h4"></h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
+                                    <p class="card-text" th:text="${event.content}"></p>
                                     <a class="btn btn-primary" th:href="@{/events/{eventId}(eventId=${event.id})}">More</a>
                                 </div>
                             </div>

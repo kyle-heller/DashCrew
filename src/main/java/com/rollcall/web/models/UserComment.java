@@ -1,5 +1,6 @@
 package com.rollcall.web.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 
 @Entity(name = "comments")
+
 public class UserComment {
 
     @Id
@@ -21,7 +23,7 @@ public class UserComment {
     private Long id;
     private String content;
 
-
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "group_id", referencedColumnName = "id")
     private Group group;

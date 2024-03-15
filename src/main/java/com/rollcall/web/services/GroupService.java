@@ -1,5 +1,6 @@
 package com.rollcall.web.services;
 
+import com.rollcall.web.dto.EventDto;
 import com.rollcall.web.dto.GroupDto;
 import com.rollcall.web.models.Group;
 
@@ -18,4 +19,6 @@ public interface GroupService {
 
     List<GroupDto> searchGroups(String query);
     void toggleUserParticipationInGroup(Long userId, Long groupId);
+
+    List<GroupDto> findGroupsByZipCode(List<Integer> zips);
 }

@@ -1,5 +1,8 @@
 package com.rollcall.web.services.impl;
 
+import com.rollcall.web.dto.EventDto;
+import com.rollcall.web.mapper.EventMapper;
+import com.rollcall.web.mapper.GroupMapper;
 import com.rollcall.web.models.Event;
 import com.rollcall.web.models.Group;
 import com.rollcall.web.dto.GroupDto;
@@ -8,7 +11,6 @@ import com.rollcall.web.repository.GroupRepository;
 import com.rollcall.web.repository.UserRepository;
 import com.rollcall.web.security.SecurityUtil;
 import com.rollcall.web.services.GroupService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -87,5 +89,12 @@ public class GroupServiceImpl implements GroupService {
         }
         userRepository.save(user); // Save the user entity back to the database
     }
-
+    @Override
+    public List<GroupDto> findGroupsByZipCode(List<Integer> zips) {
+        List<Group> events = groupRepository.findByZipCodeIn(zips);
+        // Assuming you have a method to convert entities to DTOs
+        return events.stream().map(GroupMapper::mapToGroupDto).collect(Collectors.toList());
+    }
 }
+
+

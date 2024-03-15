@@ -1,5 +1,6 @@
 package com.rollcall.web.repository;
 
+import com.rollcall.web.models.Event;
 import com.rollcall.web.models.Group;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,6 +13,10 @@ import java.util.Optional;
 @Repository
 public interface GroupRepository extends JpaRepository<Group, Long> {
     Optional<Group> findByTitle(String url);
+
+    @Query("SELECT e FROM Group e WHERE e.zip IN :zips")
+    List<Group> findByZipCodeIn(@Param("zips") List<Integer> zips);
+
     @Query("SELECT g FROM Group g WHERE " +
             "LOWER(g.title) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
             "LOWER(g.content) LIKE LOWER(CONCAT('%', :query, '%')) OR " +

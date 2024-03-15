@@ -16,4 +16,6 @@ public interface EventService {
     void deleteEvent(long eventId);
 
     void toggleUserParticipationInEvent(Long userId, Long eventId);
+
+    List<EventDto> findEventsByZipCode(List<Integer> zips);
 }
