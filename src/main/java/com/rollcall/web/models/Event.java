@@ -24,6 +24,7 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    @Column(columnDefinition = "TEXT")
     private String content;
     private String city;
     private String state;
