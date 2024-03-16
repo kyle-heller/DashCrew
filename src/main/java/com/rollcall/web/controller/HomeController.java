@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    @GetMapping("/")
-    public String index() {
+    @GetMapping("")
+    public String index2() {
         return "index"; // Ensure there's an index.html in src/main/resources/templates/
     }
 }
