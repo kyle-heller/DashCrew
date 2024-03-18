@@ -71,7 +71,10 @@ public class GroupController {
     public String groupDetail(@PathVariable("groupId") Long groupId, Model model, Principal principal) {
         GroupDto groupDto = groupService.findGroupById(groupId);
         List<UserCommentDto> comments = commentService.findGroupCommentById(groupId);
-        boolean isUserJoined = userService.isUserJoinedGroup(principal.getName(), groupId);
+        boolean isUserJoined = false;
+        if (principal != null) {
+            isUserJoined = userService.isUserJoinedGroup(principal.getName(), groupId);
+        }
         Map<Long, UserProfileDto> userAvatars = new HashMap<>();
         UserEntity user = new UserEntity();
         String username = SecurityUtil.getSessionUser();

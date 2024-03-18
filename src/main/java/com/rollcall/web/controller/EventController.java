@@ -86,7 +86,10 @@ public class EventController {
     public String viewEvent(@PathVariable("eventId") Long eventId, Model model, Principal principal) {
         EventDto eventDto = eventService.findByEventId(eventId);
         List<UserCommentDto> comments = commentService.findEventCommentById(eventId);
-        boolean isUserJoined = userService.isUserJoinedEvent(principal.getName(), eventId);
+        boolean isUserJoined = false;
+        if (principal != null) {
+            isUserJoined = userService.isUserJoinedEvent(principal.getName(), eventId);
+        }
         Map<Long, UserProfileDto> userAvatars = new HashMap<>();
 
         for (UserCommentDto comment : comments) {
