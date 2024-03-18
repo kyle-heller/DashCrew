@@ -43,7 +43,6 @@ public class UserServiceImpl implements UserService {
         Role role = roleRepository.findByName("USER");
         user.setRoles(Arrays.asList(role));
         UserProfile userProfile = new UserProfile();
-        // Links the user and profile
         user.setProfile(userProfile);
         userProfile.setUser(user);
         userRepository.save(user);

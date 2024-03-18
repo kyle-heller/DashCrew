@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 
@@ -92,7 +92,7 @@ public class ProfileController {
         }
 
         if (!updatedProfileDto.getPhotoURL().equals("Blank")) {
-            String photoURL = "http://localhost/assets/avatars/";
+            String photoURL = "http://rollcall.site/assets/avatars/";
             updatedProfileDto.setPhotoURL(photoURL + updatedProfileDto.getPhotoURL());
         }
         else {

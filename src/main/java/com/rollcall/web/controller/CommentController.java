@@ -33,17 +33,17 @@ public class CommentController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public List<UserComment> retrieveComments() {
-        return null;
-    }
-
-//    @GetMapping("/groups/{groupId}/newcomment")
-//    public String createGroupCommentForm(Model model) {
-//        UserComment comment = new UserComment();
-//        model.addAttribute("comment", comment);
-//        return "comment-create";
+//    @GetMapping
+//    public List<UserComment> retrieveComments() {
+//        return null;
 //    }
+//
+////    @GetMapping("/groups/{groupId}/newcomment")
+////    public String createGroupCommentForm(Model model) {
+////        UserComment comment = new UserComment();
+////        model.addAttribute("comment", comment);
+////        return "comment-create";
+////    }
 
     @GetMapping("/events/{eventId}/newcomment")
     public String createEventsCommentForm(@PathVariable("eventId") Long eventId, Model model) {
@@ -65,7 +65,6 @@ public class CommentController {
         return "comment-create";
     }
 
-//    retrieveComments Get
 
     @PostMapping("/events/{eventId}/newcomment")
     public String createEventComment(@PathVariable("eventId") Long eventId, UserCommentDto userCommentDto) {
@@ -94,6 +93,4 @@ public class CommentController {
     }
 }
 
-//    createComment Post
-//    updateComment Post
-//    deleteComment post
+

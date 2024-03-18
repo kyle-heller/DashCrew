@@ -62,7 +62,6 @@
          }
      </script>
  </head>
-<body class="d-flex flex-column h-100 dark-theme">
 <body class="d-flex flex-column h-100 dark-theme" data-user-id="${user.id}">
 <main class="flex-shrink-0">
     <!-- Page Content-->
@@ -82,7 +81,7 @@
                 <form th:action="@{/groups/search}" class="form-check-inline my-2 my-lg-0 mb-3">
                     <input name="query" class="form-control mr-sm-2 mb-5" type="search" placeholder="Search gaming groups" aria-label="Search">
                 </form>
-                <button id="sortClosestBtn" class="btn btn-primary" data-filter-type="groups">Sort by Closest</button>
+                <button id="sortClosestBtn" class="btn btn-primary" data-filter-type="groups">Find Closest</button>
             </div>
             <div id="groupList" class="row gx-5">
                 <div th:each="group :${groups}" class="col-lg-3 col-md-4 col-sm-6 mb-2">

@@ -17,8 +17,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     @Query("SELECT g FROM Event g WHERE " +
             "LOWER(g.name) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
-            "LOWER(g.type) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
-            "LOWER(g.zip) LIKE LOWER(CONCAT('%', :query, '%'))")
+            "LOWER(g.type) LIKE LOWER(CONCAT('%', :query, '%'))")
     List<Event> searchGroups(@Param("query") String query);
 
 }
