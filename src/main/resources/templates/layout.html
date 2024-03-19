@@ -24,14 +24,14 @@
                 <li class="nav-item"><a class="nav-link" th:href="@{/games}">Browse Games</a></li>
                 <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/login}">Login</a></li>
                 <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/register}">Register</a></li>
-                <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Welcome</a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
                         <li><a class="dropdown-item" th:href="@{/groups/new}">Create Group</a></li>
                         <li><a class="dropdown-item" th:href="@{/events/new}">Create Event</a></li>
                         <li><a class="dropdown-item" th:href="@{/games/new}">Add Game</a></li>
                         <li><a class="dropdown-item" th:href="@{/users/profile}">View Profile</a></li>
-                        <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
+                        <li><a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/logout}">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -78,7 +78,6 @@
     darkModeToggle.addEventListener('change', toggleDarkMode);
     document.addEventListener('DOMContentLoaded', initDarkMode);
 </script>
-
 <section class="py-5">
 </section>
 <footer class="bg-dark py-4 mt-auto">

@@ -3,7 +3,6 @@ package com.rollcall.web.services;
 import com.rollcall.web.dto.RegistrationDto;
 import com.rollcall.web.dto.UserProfileDto;
 import com.rollcall.web.models.UserEntity;
-import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 

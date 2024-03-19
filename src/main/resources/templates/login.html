@@ -5,6 +5,7 @@
 <head>
     <title>Login</title>
 </head>
+<body class="d-flex flex-column h-100">
 <section layout:fragment="body">
     <style>
         .main {
@@ -67,10 +68,25 @@
                     <a th:href="@{/register}" type="submit" class="btn btn-black">Don't have an account? Register
                         here.
                     </a>
-                    <button type="submit" value="Log in" class="btn btn-secondary m-2">Login</button>
+                    <button type="submit" value="Log in" class="btn btn-secondary m-2">Login</button><br>
+                    <div id="g_id_onload"
+                         data-client_id="173405053070-h5qm4hagffmd7vsj70a005prbqnv7frj.apps.googleusercontent.com"
+                         data-login_uri="https://rollcall.site/login/oauth2/code/google"
+                         data-auto_prompt="false">
+                    </div>
+                    <div class="g_id_signin"
+                         data-type="standard"
+                         data-size="large"
+                         data-theme="outline"
+                         data-text="sign_in_with"
+                         data-shape="rectangular"
+                         data-logo_alignment="left">
+                    </div>
                 </form>
             </div>
         </div>
     </div>
+    <script src="https://accounts.google.com/gsi/client" async></script>
 </section>
+</body>
 </html>
