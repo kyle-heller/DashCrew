@@ -2,7 +2,7 @@
 
 RollCall is a community-focused web application designed to bring gamers together by facilitating the organization and discovery of gaming events. Users can create, browse, and join events for board games, role-playing games, and card games. The platform also allows users to form and manage groups, fostering a sense of community among gamers.
 
-Check it out live! http://rollcall.site/
+Check it out live! https://rollcall.site/
 
 ## Features
 
