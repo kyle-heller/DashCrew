@@ -28,26 +28,23 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf().disable()
-                .authorizeRequests()
-                .requestMatchers("/login", "/register", "/clubs", "/css/**", "/js/**")
-                .permitAll()
-                .and()
+        httpSecurity
+                .csrf().disable() // Consider enabling CSRF for form-based applications
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/login", "/register", "/events", "/games", "/groups", "/css/**", "/js/**","/assets/**").permitAll()
+                        .anyRequest().authenticated()
+                )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/groups")
+                        .defaultSuccessUrl("/groups", true)
                         .loginProcessingUrl("/login")
                         .failureUrl("/login?error=true")
                         .permitAll()
-                ).logout(
-                        logout -> logout
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .permitAll()
                 );
-
         return httpSecurity.build();
-    }
-
-    public void configure(AuthenticationManagerBuilder builder) throws Exception {
-        builder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 }
