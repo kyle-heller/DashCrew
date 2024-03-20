@@ -31,7 +31,7 @@ public class SecurityConfig {
         httpSecurity
                 .csrf().disable() // Consider enabling CSRF for form-based applications
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login/**", "/", "/register", "/events", "/games", "/groups", "/css/**", "/js/**","/assets/**").permitAll()
+                        .requestMatchers("/login/**", "/", "/register", "/events/**", "/games/**", "/groups/**", "/css/**", "/js/**","/assets/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
